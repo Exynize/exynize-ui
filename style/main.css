@@ -1,0 +1,15 @@
+.navbar-inverse .navbar-nav>li>a.active,
+.navbar-inverse .navbar-nav>li>a.active:focus,
+.navbar-inverse .navbar-nav>li>a.active:hover {
+    color: inherit;
+    background-color: rgba(255,255,255,.1);
+}
+
+.input-group-margined {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-margin-left {
+    margin-left: 5px;
+}
