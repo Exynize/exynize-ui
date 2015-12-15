@@ -7,8 +7,8 @@
     "clean": "rm -rf dist/",
     "start": "npm run clean && node index.js",
     "build": "NODE_ENV=production node build.js",
-    "build-docker": "npm run build && docker build -t exynize-ui .",
-    "start-docker": "docker run -it --rm -p 3000:80 exynize-ui"
+    "build-docker": "docker build -t exynize-ui .",
+    "start-docker": "docker run -it --rm -p 80:3000 -e NODE_ENV=production --link exynize-rest:exynize-rest --name exynize-ui exynize-ui"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "esprima": "^2.7.0",
     "estraverse": "^4.1.1",
     "history": "1.13.1",
+    "http-proxy-middleware": "^0.9.0",
     "immutable": "^3.7.5",
     "jwt-decode": "^1.4.0",
     "react": "^0.14.2",
