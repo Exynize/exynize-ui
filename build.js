@@ -13,10 +13,15 @@ config.plugins = [
 // returns a Compiler instance
 const compiler = webpack(config);
 
-compiler.run(function(err) {
+compiler.run(function(err, stat) {
     if (err) {
         console.error('error:', err);
-        return;
+        process.exit(1);
+    }
+
+    if (stat.compilation.errors && stat.compilation.errors.length > 0) {
+        console.error('error:', stat.compilation.errors);
+        process.exit(1);
     }
 
     console.log('done!');
