@@ -15,7 +15,7 @@
     "url": "git@github.com:Exynize/exynize-ui.git"
   },
   "author": "Tim Ermilov <yamalight@gmail.com> (http://codezen.net)",
-  "license": "Dual LGPL-3.0 / Commercial",
+  "license": "SEE LICENSE IN LICENSE.md",
   "homepage": "https://github.com/Exynize/exynize-ui",
   "dependencies": {
     "babel-polyfill": "^6.0.16",
