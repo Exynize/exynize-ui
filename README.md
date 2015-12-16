@@ -30,11 +30,7 @@ You'll also need [Exynize REST](https://github.com/Exynize/exynize-rest) for the
 
 ### Installation
 
-1. Clone the repository and cd into new folder:
-```
-➜  git clone git@github.com:Exynize/exynize-ui.git
-➜  cd exynize-ui
-```
+1. Clone the repository and cd into new folder: `git clone git@github.com:Exynize/exynize-ui.git && cd exynize-ui`
 2. Execute `npm install`
 3. Execute `npm start`
 4. Exynize UI will start working on `http://localhost:3000`
@@ -44,4 +40,4 @@ Alternatively, you can use Dockerfile to assemble docker container and then star
 ## License
 
 Dual licensed under LGPL-3.0 and commercial license.
-See LICENSE file for more details.
+See LICENSE.md file for more details.

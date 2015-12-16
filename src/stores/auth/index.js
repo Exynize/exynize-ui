@@ -4,7 +4,6 @@ import defaultState from './defaultState';
 // actions
 import loginStream, {login} from './login';
 import registerStream, {register} from './register';
-import requestAccessStream, {requestAccess} from './requestAccess';
 import resetPasswordStream, {resetPassword} from './resetPassword';
 import logoutStream, {logout} from './logout';
 
@@ -17,7 +16,6 @@ const authSubject = new ReplaySubject(1);
 // plug in all actions
 loginStream.subscribe(authSubject);
 registerStream.subscribe(authSubject);
-requestAccessStream.subscribe(authSubject);
 resetPasswordStream.subscribe(authSubject);
 logoutStream.subscribe(authSubject);
 
@@ -30,7 +28,7 @@ export let currentState = defaultState.toJS();
 auth.subscribe(state => currentState = state);
 
 // export actions
-export {login, register, logout, requestAccess, resetPassword};
+export {login, register, logout, resetPassword};
 // export utils
 export {signRequest};
 // export state and state stream

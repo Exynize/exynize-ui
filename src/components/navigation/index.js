@@ -22,12 +22,9 @@ const notAuthedMenu = [
     <li key="login">
         <Link activeClassName="active" to="/login">Login</Link>
     </li>,
-    <li key="requestAccess">
-        <Link activeClassName="active" to="/requestAccess">Request access</Link>
-    </li>,
-    /*<li key="register">
+    <li key="register">
         <Link activeClassName="active" to="/register">Register</Link>
-    </li>,*/
+    </li>,
 ];
 
 const Navigation = React.createClass({

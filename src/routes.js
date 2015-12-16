@@ -6,8 +6,7 @@ import {requireAuth, requireAdminAuth} from './components/auth';
 import NotFound from './pages/notfound';
 import Home from './pages/home';
 import Admin from './pages/admin';
-// import Register from './pages/register';
-import RequestAccess from './pages/requestAccess';
+import Register from './pages/register';
 import Login from './pages/login';
 import Logout from './pages/logout';
 import ComponentsCatalogue from './pages/componentsCatalogue';
@@ -17,8 +16,7 @@ import NewPipeline from './pages/newpipeline';
 
 export default [
     <IndexRoute key="home" name="home" component={Home} onEnter={requireAuth} />,
-    //<Route key="register" path="/register" component={Register}/>,
-    <Route key="register" path="/requestAccess" component={RequestAccess}/>,
+    <Route key="register" path="/register" component={Register}/>,
     <Route key="login" path="/login" component={Login}/>,
     <Route key="logout" path="/logout" component={Logout}/>,
     <Route key="admin" path="/admin" component={Admin} onEnter={requireAdminAuth} />,

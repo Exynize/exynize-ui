@@ -3,7 +3,7 @@ import md5 from 'blueimp-md5';
 import {Checkbox} from '../../components/bootstrap';
 import {RxState} from '../../stores/util';
 import auth, {resetPassword} from '../../stores/auth';
-import admin, {getUsers, updateUser, approveEmail} from '../../stores/admin';
+import admin, {getUsers, updateUser} from '../../stores/admin';
 
 const Admin = React.createClass({
     mixins: [RxState],
@@ -31,10 +31,6 @@ const Admin = React.createClass({
         resetPassword(user);
     },
 
-    handleApproveEmail(user) {
-        approveEmail(user);
-    },
-
     render() {
         return (
             <div className="row">
@@ -54,17 +50,10 @@ const Admin = React.createClass({
                                         {user.get('name')} &lt;{user.get('email')}&gt;
                                     </h4>
                                     <div className="list-group-item-text">
-                                        <pre>
-                                            {user.get('requestDescription')}
-                                        </pre>
                                         <Checkbox
                                             label="Email validated"
                                             checked={user.get('isEmailValid')}
                                             onChange={this.handleChange.bind(this, 'isEmailValid', user)} />
-                                        <Checkbox
-                                            label="Account approved"
-                                            checked={user.get('isApproved')}
-                                            onChange={this.handleChange.bind(this, 'isApproved', user)} />
                                         <Checkbox
                                             label="Admin"
                                             checked={user.get('isAdmin')}
@@ -73,11 +62,6 @@ const Admin = React.createClass({
                                             className="btn btn-warning"
                                             onClick={this.handlePasswordReset.bind(this, user)}>
                                             Reset password
-                                        </button>
-                                        <button
-                                            className="btn btn-success"
-                                            onClick={this.handleApproveEmail.bind(this, user)}>
-                                            Send approve email
                                         </button>
                                     </div>
                                 </div>
