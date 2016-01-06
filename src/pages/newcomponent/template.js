@@ -1,89 +1,139 @@
 import React from 'react';
-import {Row} from '../../components/bootstrap';
 
 const render = function() {
     return (
-        <Row size="12">
-            <Row size="12">
-                <h4>Component name:</h4>
-                <input className="form-control" type="text" value={this.state.name} onChange={this.handleName} />
-            </Row>
-            <Row size="12">
-                <h4>Component description:</h4>
-                <textarea className="form-control" value={this.state.description} onChange={this.handleDescription} />
-            </Row>
-            <Row size="12">
-                <h4>Component type: <small>{this.state.codeAnalysis.componentType}</small></h4>
-            </Row>
-            <Row size="12">
-                <h3>Code:</h3>
+        <div className="row">
+            <div className="col-xs-6 col-xs-offset-2 input-group component-header">
+                {/* component type */}
+                <span className="input-group-addon">
+                    <span className="label label-info">
+                        {this.state.codeAnalysis.componentType ?
+                            this.state.codeAnalysis.componentType :
+                            'unknown'}
+                    </span>
+                </span>
+                {/* component name */}
+                <input className="form-control" type="text" id="componentName"
+                    value={this.state.name} onChange={this.handleName}
+                    placeholder="Component name"/>
+
+                {/* main action buttons (save / clear) */}
+                <div className="input-group-btn">
+                    <button className="btn btn-default"
+                        onClick={this.createComponent}
+                        title={this.state.id ? 'Update' : 'Save'}>
+                        <i className="glyphicon glyphicon-save"></i> Save
+                    </button>
+                    {/*<button className="btn btn-default"
+                        onClick={this.resetEditor}
+                        title="Reset editor">
+                        <i className="glyphicon glyphicon-remove"></i>
+                    </button>*/}
+                </div>
+            </div>
+            <div className="col-xs-6 col-xs-offset-2">
+                {/* component code */}
                 <textarea
                     ref="code"
                     className="form-control"
                     defaultValue={this.state.code} />
-            </Row>
-            <Row size="12">
-                {this.state.codeAnalysis.error ? (
-                    <div className="alert alert-danger">
-                        {this.state.codeAnalysis.error}
-                    </div>
-                ) : ''}
-                {this.state.codeAnalysis.testParams && this.state.codeAnalysis.testParams.length ? (
-                    <div>
-                        <h3>Test params:</h3>
-                        {this.state.codeAnalysis.testParams.map((paramName, i) => (
-                            <div className="input-group input-group-margined" key={'param_' + i}>
-                                <span className="input-group-addon">
-                                    {paramName}
-                                </span>
-                                <input
-                                    ref={paramName}
-                                    className="form-control"
-                                    type="text"
-                                    placeholder={paramName} />
-                            </div>
-                        ))}
-                    </div>
-                ) : ''}
-            </Row>
-            <Row size="12">
-                <button className="btn btn-warning" onClick={this.testCode}>
-                    Test
-                </button>
-                {this.state.testResult && this.state.testResult.ws ? (
-                    <button className="btn btn-danger" onClick={this.stopTest}>
-                        Stop test
-                    </button>
-                ) : ''}
 
-                <button className="btn btn-primary pull-right" onClick={this.createComponent}>
-                    {this.state.id ? 'Update' : 'Create'}
-                </button>
-                <button className="btn btn-warning pull-right" onClick={this.resetEditor}>
-                    Reset editor
-                </button>
-            </Row>
-            {this.state.testResult.error ? (
-            <div className="alert alert-danger">
-                <button className="close" onClick={this.resetTestResult}>
-                    <span>&times;</span>
-                </button>
-                {this.state.testResult.error}
+                {/* linter/code errors */}
+                <div className="row">
+                    {this.state.codeAnalysis.error ? (
+                        <div className="alert alert-danger">
+                            {this.state.codeAnalysis.error}
+                        </div>
+                    ) : ''}
+                </div>
             </div>
-            ) : ''}
-            {this.state.testResult.resp ? (
-            <Row size="12" key="testRes">
-                <p>Test result:</p>
-                {this.state.codeAnalysis.componentType === 'render' ? (
-                    <div className="well">
-                        <div dangerouslySetInnerHTML={{__html: this.state.testResult.resp[1]}} />
-                    </div>
-                ) : (
-                    <pre>{JSON.stringify(this.state.testResult.resp, null, 4)}</pre>
+            <div className="col-xs-3">
+                {/* description */}
+                <div className="row">
+                    <h5>Component description:</h5>
+                    <textarea
+                        className="form-control"
+                        placeholder="Enter component description..."
+                        value={this.state.description}
+                        onChange={this.handleDescription} />
+                </div>
+
+                {/* function parameters for testing */}
+                <div className="row">
+                    {this.state.codeAnalysis.testParams && this.state.codeAnalysis.testParams.length ? (
+                        <div>
+                            <h5>Test params:</h5>
+                            {this.state.codeAnalysis.testParams.map((paramName, i) => (
+                                <div className="input-group input-group-margined" key={'param_' + i}>
+                                    <span className="input-group-addon">
+                                        {paramName}
+                                    </span>
+                                    <input
+                                        ref={paramName}
+                                        className="form-control"
+                                        type="text"
+                                        placeholder={`test value for "${paramName}"`} />
+                                </div>
+                            ))}
+                        </div>
+                    ) : ''}
+                </div>
+
+                {/* test buttons */}
+                {this.state.codeAnalysis.error ? '' : (
+                <div className="row row-margin-top">
+                    <button className="btn btn-warning" onClick={this.testCode}>
+                        Test
+                    </button>
+                    {this.state.testResult && this.state.testResult.ws ? (
+                        <button className="btn btn-danger btn-margin-left" onClick={this.stopTest}>
+                            Stop test
+                        </button>
+                    ) : ''}
+                </div>
                 )}
-            </Row>
-            ) : ''}
-        </Row>
+
+                {/* test result expand/collapse control */}
+                <div className="row row-margin-top">
+                    <button
+                        className="btn btn-xs btn-default btn-noshadow btn-normal-case"
+                        onClick={this.toggleTestResults}>
+                        <i className={'glyphicon glyphicon-chevron-' + (this.state.testExpanded ? 'up' : 'down')} />
+                        &nbsp;{this.state.testExpanded ? 'Hide' : 'Show'} test results
+                    </button>
+                </div>
+
+                {/* test results */}
+                {this.state.testExpanded ? (
+                <div className="row row-margin-top">
+                    {/* test error alert */}
+                    {this.state.testResult.error ? (
+                    <div className="alert alert-danger">
+                        <button className="close" onClick={this.resetTestResult}>
+                            <span>&times;</span>
+                        </button>
+                        {this.state.testResult.error}
+                    </div>
+                    ) : ''}
+
+                    {/* test results output */}
+                    {this.state.testResult.resp ? (
+                    <div key="testRes">
+                        <h4>Test result:</h4>
+                        {this.state.codeAnalysis.componentType === 'render' ? (
+                            <div className="well">
+                                <div dangerouslySetInnerHTML={{__html: this.state.testResult.resp[1]}} />
+                            </div>
+                        ) : (
+                            <pre>{JSON.stringify(this.state.testResult.resp, null, 4)}</pre>
+                        )}
+                    </div>
+                    ) : (
+                        <h5>No test results yet...</h5>
+                    )}
+                </div>) : ''}
+            </div>
+        </div>
     );
 };
 

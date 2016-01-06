@@ -1,8 +1,21 @@
+body {
+    font-size: 14px;
+}
+
 .navbar-inverse .navbar-nav>li>a.active,
 .navbar-inverse .navbar-nav>li>a.active:focus,
 .navbar-inverse .navbar-nav>li>a.active:hover {
-    color: inherit;
-    background-color: rgba(255,255,255,.1);
+    color: #ffffff;
+    background-color: #0c7cd5;
+}
+
+.label {
+    font-size: 85%;
+}
+
+.component-header {
+    margin-bottom: 10px;
+    padding-right: 15px !important;
 }
 
 .input-group-margined {
@@ -12,4 +25,31 @@
 
 .btn-margin-left {
     margin-left: 5px;
+}
+
+.btn-noshadow {
+    box-shadow: none;
+}
+
+.btn-normal-case {
+    text-transform: none;
+}
+
+.row-margin-top {
+    margin-top: 10px;
+}
+
+#container > .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.container-fluid > .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.CodeMirror {
+    height: 500px !important;
+    border: 1px solid rgba(0,0,0,0.1);
 }

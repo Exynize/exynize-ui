@@ -30,6 +30,7 @@ const NewComponent = React.createClass({
             codeAnalysis: {},
             testResult: {},
             createResult: {},
+            testExpanded: false,
         };
     },
 
@@ -48,6 +49,10 @@ const NewComponent = React.createClass({
         }
     },
 
+    toggleTestResults() {
+        this.setState({testExpanded: !this.state.testExpanded});
+    },
+
     resetEditor() {
         this.setState({
             name: '',
@@ -63,7 +68,10 @@ const NewComponent = React.createClass({
         try {
             codeAnalysis = analyseCode(code);
         } catch (e) {
-            codeAnalysis = {error: e.toString()};
+            codeAnalysis = {
+                ...this.state.codeAnalysis,
+                error: e.toString(),
+            };
         }
         this.setState({code, codeAnalysis});
     },
@@ -76,7 +84,7 @@ const NewComponent = React.createClass({
 
     testCode(e) {
         e.preventDefault();
-        this.setState({testResult: {}});
+        this.setState({testResult: {}, testExpanded: true});
         const args = this.state.codeAnalysis.testParams.map(name => this.refs[name].value);
         testComponent({
             args,
