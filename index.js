@@ -10,6 +10,13 @@ config.plugins = [
     new webpack.DefinePlugin({
         'process.env': {NODE_ENV: JSON.stringify(process.env.NODE_ENV)}
     }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+];
+// override entry for hotload
+config.entry = [
+    'webpack-hot-middleware/client',
+    config.entry,
 ];
 // returns a Compiler instance
 const compiler = webpack(config);

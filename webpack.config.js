@@ -1,8 +1,7 @@
-/* eslint no-var: 0 */
-var path = require('path');
+const path = require('path');
 
 module.exports = {
-    devtool: 'eval',
+    devtool: 'cheap-module-eval-source-map',
     debug: true,
     context: path.resolve(__dirname, 'src'),
     entry: path.join(__dirname, 'src', 'index.js'),
