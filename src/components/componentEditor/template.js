@@ -125,7 +125,7 @@ const render = function() {
                                 <div dangerouslySetInnerHTML={{__html: this.state.testResult.resp[1]}} />
                             </div>
                         ) : (
-                            <pre>{JSON.stringify(this.state.testResult.resp, null, 4)}</pre>
+                            <pre className="testResults">{JSON.stringify(this.state.testResult.resp, null, 4)}</pre>
                         )}
                     </div>
                     ) : (

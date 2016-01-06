@@ -53,3 +53,8 @@ body {
     height: 500px !important;
     border: 1px solid rgba(0,0,0,0.1);
 }
+
+.testResults {
+    overflow: auto;
+    max-height: 260px;
+}
