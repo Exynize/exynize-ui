@@ -3,34 +3,48 @@ import React from 'react';
 const render = function() {
     return (
         <div className="row">
-            <div className="col-xs-6 col-xs-offset-2 input-group component-header">
-                {/* component type */}
-                <span className="input-group-addon">
-                    <span className="label label-info">
-                        {this.state.codeAnalysis.componentType ?
-                            this.state.codeAnalysis.componentType :
-                            'unknown'}
+            <div className="col-xs-6 col-xs-offset-2 component-header">
+                <div className="input-group">
+                    {/* component type */}
+                    <span className="input-group-addon">
+                        <span className="label label-info">
+                            {this.state.codeAnalysis.componentType ?
+                                this.state.codeAnalysis.componentType :
+                                'unknown'}
+                        </span>
                     </span>
-                </span>
-                {/* component name */}
-                <input className="form-control" type="text" id="componentName"
-                    value={this.state.name} onChange={this.handleName}
-                    placeholder="Component name"/>
+                    {/* component name */}
+                    <input className="form-control" type="text" id="componentName"
+                        value={this.state.name} onChange={this.handleName}
+                        placeholder="Component name"/>
 
-                {/* main action buttons (save / clear) */}
-                <div className="input-group-btn">
-                    <button className="btn btn-default"
-                        onClick={this.createComponent}
-                        title={this.state.id ? 'Update' : 'Save'}>
-                        <i className="glyphicon glyphicon-save"></i> Save
-                    </button>
-                    {/*<button className="btn btn-default"
-                        onClick={this.resetEditor}
-                        title="Reset editor">
-                        <i className="glyphicon glyphicon-remove"></i>
-                    </button>*/}
+                    {/* main action buttons (save / clear) */}
+                    <div className="input-group-btn">
+                        <button className="btn btn-default"
+                            onClick={this.createComponent}
+                            title={this.state.id ? 'Update' : 'Save'}>
+                            <i className="glyphicon glyphicon-save"></i> Save
+                        </button>
+                        {/*<button className="btn btn-default"
+                            onClick={this.resetEditor}
+                            title="Reset editor">
+                            <i className="glyphicon glyphicon-remove"></i>
+                        </button>*/}
+                    </div>
                 </div>
             </div>
+
+            <div className="col-xs-3">
+                {/* component version */}
+                <input className="form-control" type="text" id="componentVersion"
+                    value={this.state.version} onChange={this.handleVersion}
+                    placeholder="Component version"/>
+                {this.state.versionError ? (
+                    <p className="text-danger">{this.state.versionError}</p>
+                ) : ''}
+            </div>
+
+            {/* main area */}
             <div className="col-xs-6 col-xs-offset-2">
                 {/* component code */}
                 <textarea
@@ -47,6 +61,8 @@ const render = function() {
                     ) : ''}
                 </div>
             </div>
+
+            {/* sidebar */}
             <div className="col-xs-3">
                 {/* description */}
                 <div className="row">

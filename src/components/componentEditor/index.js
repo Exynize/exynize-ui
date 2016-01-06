@@ -1,5 +1,6 @@
 import React from 'react';
 import uuid from 'node-uuid';
+import semver from 'semver';
 import {RxState} from '../../stores/util';
 import componentStore, {testComponent, createComponent} from '../../stores/component';
 import codemirror from './codemirror/codemirror';
@@ -16,14 +17,16 @@ const ComponentEditor = React.createClass({
 
     getInitialState() {
         const component = {
-            id: uuid.v4(),
             source: defaultFunction,
+            version: '1.0.0',
         };
+        // generate test id
+        component.testId = uuid.v4();
 
         // setup store
         this.stores = {
             testResult: componentStore.map(v => v.get('testResult').toJS())
-                .map(testResult => testResult[this.state.id])
+                .map(testResult => testResult[this.state.testId])
                 .filter(testResult => testResult !== undefined),
         };
 
@@ -32,7 +35,9 @@ const ComponentEditor = React.createClass({
             id: component.id,
             code: component.source,
             name: component.name,
+            version: component.version,
             description: component.description,
+            testId: component.testId,
             codeAnalysis: {},
             testResult: {},
             createResult: {},
@@ -84,6 +89,14 @@ const ComponentEditor = React.createClass({
     handleName(e) {
         this.setState({name: e.target.value});
     },
+    handleVersion(e) {
+        const version = e.target.value;
+        if (semver.valid(version)) {
+            this.setState({version, versionError: ''});
+        } else {
+            this.setState({version, versionError: 'Version number must follow semantic versioning!'});
+        }
+    },
     handleDescription(e) {
         this.setState({description: e.target.value});
     },
@@ -92,9 +105,9 @@ const ComponentEditor = React.createClass({
         e.preventDefault();
         this.setState({testResult: {}, testExpanded: true});
         const args = this.state.codeAnalysis.testParams.map(name => this.refs[name].value);
-        const {id} = this.state;
+        const {testId} = this.state;
         testComponent({
-            id,
+            id: testId,
             args,
             source: this.state.code,
             componentType: this.state.codeAnalysis.componentType,
@@ -120,6 +133,7 @@ const ComponentEditor = React.createClass({
         const comp = {
             name: this.state.name,
             description: this.state.description,
+            version: this.state.version,
             source: this.state.code,
             params: this.state.codeAnalysis.params,
             type: this.state.codeAnalysis.componentType,
