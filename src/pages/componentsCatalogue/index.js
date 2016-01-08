@@ -21,21 +21,25 @@ const ComponentsCatalogue = React.createClass({
 
     render() {
         return (
-            <Row size="12">
-                <h2>Components catalogue:</h2>
-                {this.state.components.map(c => c.toJS()).map(c => (
-                    <Row size="12" key={'component_' + c.id}>
-                        <button
-                            className="btn btn-warning btn-xs pull-right"
-                            onClick={this.handleComponentEdit.bind(this, c)}>
-                            Edit
-                        </button>
-                        <h4>{c.name} <small className="label label-default">{c.type}</small></h4>
-                        <small>{c.description}</small>
-                        <pre style={{marginTop: 10}}>{c.source}</pre>
-                    </Row>
-                ))}
-            </Row>
+            <div className="row">
+                <div className="col-xs-8 col-xs-offset-2">
+                    <div className="page-header">
+                        <h3>Components catalogue</h3>
+                    </div>
+                    {this.state.components.map(c => c.toJS()).map(c => (
+                        <Row size="12" key={'component_' + c.id}>
+                            <button
+                                className="btn btn-warning btn-xs pull-right"
+                                onClick={this.handleComponentEdit.bind(this, c)}>
+                                Edit
+                            </button>
+                            <h5>{c.name} <small className="label label-default">{c.type}</small></h5>
+                            <small>{c.description}</small>
+                            <pre style={{marginTop: 10}}>{c.source}</pre>
+                        </Row>
+                    ))}
+                </div>
+            </div>
         );
     },
 });

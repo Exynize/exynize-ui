@@ -40,16 +40,19 @@ const PipelinesCatalogue = React.createClass({
 
     render() {
         return (
-            <Row size="12">
-                <h2>Pipelines catalogue:</h2>
-                {this.state.pipelines.map(p => p.toJS()).map(p => (
+            <div className="row">
+                <div className="col-xs-8 col-xs-offset-2">
+                    <div className="page-header">
+                        <h3>Pipelines catalogue</h3>
+                    </div>
+                    {this.state.pipelines.map(p => p.toJS()).map(p => (
                     <div className="well" key={'pipeline_' + p.id}>
-                        <h3>
+                        <h4>
                             <small>Name:</small>
                             <a href={`http://${apiUri}/api/pipes/${p.id}?token=${localStorage.getItem('auth.token')}`}>
                                 {p.name}
                             </a>
-                        </h3>
+                        </h4>
                         <Row size="12">
                             <span className={'label label-' + (p.status === 'running' ? 'success' : 'default')}>
                                 Status: {p.status}
@@ -77,9 +80,9 @@ const PipelinesCatalogue = React.createClass({
                             Edit
                         </button>
                     </div>
-                ))}
+                    ))}
 
-                {this.state.pipelineLog ? (
+                    {this.state.pipelineLog ? (
                     <Modal title="Pipeline log" onClose={this.closePipelineLog}>
                         {this.state.pipelineLog.map(g => g.toJS()).map(group => (
                             <div className="panel panel-default" key={'loggroup_' + group.group}>
@@ -98,8 +101,9 @@ const PipelinesCatalogue = React.createClass({
                             </div>
                         ))}
                     </Modal>
-                ) : ''}
-            </Row>
+                    ) : ''}
+                </div>
+            </div>
         );
     },
 });
