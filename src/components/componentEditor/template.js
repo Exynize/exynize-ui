@@ -36,11 +36,23 @@ const render = function() {
 
             <div className="col-xs-3">
                 {/* component version */}
-                <input className="form-control" type="text" id="componentVersion"
+                <input className="form-control version-input" type="text" id="componentVersion"
                     value={this.state.version} onChange={this.handleVersion}
                     placeholder="Component version"/>
+                <label className="component-toggle">
+                    <input
+                        type="checkbox"
+                        checked={this.state.isPublic}
+                        onChange={this.handlePublicChange} /> Public
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={this.state.isSourcePublic}
+                        onChange={this.handleSourcePublicChange} /> Source public
+                </label>
                 {this.state.versionError ? (
-                    <p className="text-danger">{this.state.versionError}</p>
+                    <p className="text-danger input-error-text">{this.state.versionError}</p>
                 ) : ''}
             </div>
 

@@ -58,3 +58,20 @@ body {
     overflow: auto;
     max-height: 260px;
 }
+
+.version-input {
+    width: 70px;
+    text-align: center;
+    float: left;
+}
+
+.component-toggle {
+    margin-top: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.input-error-text {
+    position: fixed;
+    margin-top: -4px;
+}

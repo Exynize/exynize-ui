@@ -106,6 +106,12 @@ const ComponentEditor = React.createClass({
     handleDescription(e) {
         this.setState({description: e.target.value});
     },
+    handlePublicChange(e) {
+        this.setState({isPublic: e.target.checked});
+    },
+    handleSourcePublicChange(e) {
+        this.setState({isSourcePublic: e.target.checked});
+    },
 
     testCode(e) {
         e.preventDefault();
