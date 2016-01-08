@@ -59,7 +59,7 @@ const ComponentEditor = React.createClass({
                 indentUnit: 4,
                 mode: 'javascript',
                 extraKeys: {'Ctrl-Space': 'autocomplete'},
-                value: this.state.code,
+                value: this.state.source,
             });
             this.editor.on('change', this.handleCodeChange);
             this.handleCodeChange();
@@ -115,7 +115,7 @@ const ComponentEditor = React.createClass({
         testComponent({
             id: testId,
             args,
-            source: this.state.code,
+            source: this.state.source,
             componentType: this.state.codeAnalysis.componentType,
         });
     },
@@ -140,11 +140,11 @@ const ComponentEditor = React.createClass({
             name: this.state.name,
             description: this.state.description,
             version: this.state.version,
-            source: this.state.code,
+            source: this.state.source,
             params: this.state.codeAnalysis.params,
             type: this.state.codeAnalysis.componentType,
-            isPublic: true,
-            isSourcePublic: true,
+            isPublic: this.state.isPublic,
+            isSourcePublic: this.state.isSourcePublic,
         };
         if (this.state.id) {
             comp.id = this.state.id;

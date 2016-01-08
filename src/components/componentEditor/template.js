@@ -50,7 +50,7 @@ const render = function() {
                 <textarea
                     ref="code"
                     className="form-control"
-                    defaultValue={this.state.code} />
+                    defaultValue={this.state.source} />
 
                 {/* linter/code errors */}
                 <div className="row">
