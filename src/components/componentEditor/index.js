@@ -15,11 +15,17 @@ const defaultFunction = `export default (data) => {
 const ComponentEditor = React.createClass({
     mixins: [RxState],
 
-    getInitialState() {
-        const component = {
-            source: defaultFunction,
-            version: '1.0.0',
+    getDefaultProps() {
+        return {
+            component: {
+                source: defaultFunction,
+                version: '1.0.0',
+            },
         };
+    },
+
+    getInitialState() {
+        const component = this.props.component;
         // generate test id
         component.testId = uuid.v4();
 
