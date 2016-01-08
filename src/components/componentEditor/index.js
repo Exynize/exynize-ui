@@ -18,18 +18,23 @@ const ComponentEditor = React.createClass({
     getDefaultProps() {
         return {
             component: {
+                name: 'My new component',
+                description: 'My new component description',
                 source: defaultFunction,
                 version: '1.0.0',
+                isPublic: false,
+                isSourcePublic: false,
             },
         };
     },
 
     getInitialState() {
+        // get component from props
         const component = this.props.component;
         // generate test id
         component.testId = uuid.v4();
 
-        // setup store
+        // setup store with new testId
         this.stores = {
             testResult: componentStore.map(v => v.get('testResult').toJS())
                 .map(testResult => testResult[this.state.testId])
@@ -38,12 +43,7 @@ const ComponentEditor = React.createClass({
 
         // return
         return {
-            id: component.id,
-            code: component.source,
-            name: component.name,
-            version: component.version,
-            description: component.description,
-            testId: component.testId,
+            ...component,
             codeAnalysis: {},
             testResult: {},
             createResult: {},
