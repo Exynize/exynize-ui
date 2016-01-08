@@ -24,8 +24,8 @@ const stream = register.$
     })
     .catch(err => {
         createNotification({
-            message: `Error registering, server returned ${err.response.code}!
-            Server response: ${err.response.body.error}`,
+            message: `Error registering, server returned ${err.response.statusCode}!
+            Server response: ${err.response.body.message}`,
             type: 'danger',
         });
         return Observable.return(undefined);

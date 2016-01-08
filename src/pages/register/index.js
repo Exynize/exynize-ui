@@ -24,13 +24,14 @@ const Register = React.createClass({
 
     register() {
         const email = this.refs.email.value;
+        const username = this.refs.username.value;
         const password = this.refs.pass.value;
         const passRepeat = this.refs.passRepeat.value;
         if (password !== passRepeat) {
             this.setState({error: 'Passwords must match!'});
             return;
         }
-        register({email, password});
+        register({email, username, password});
     },
 
     resetError() {
@@ -42,11 +43,12 @@ const Register = React.createClass({
     render() {
         return (
             <div className="row">
-                <div className="col-xs-12">
+                <div className="col-xs-4 col-xs-offset-4">
                     {this.state.error ? (
                         <div className="alert alert-danger">{this.state.error}</div>
                     ) : ''}
                     <input className="form-control" type="text" placeholder="Email" ref="email" />
+                    <input className="form-control" type="text" placeholder="Username" ref="username" />
                     <input
                         className="form-control"
                         type="password"

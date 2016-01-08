@@ -29,7 +29,7 @@ const Login = React.createClass({
     render() {
         return (
             <div className="row">
-                <div className="col-xs-12">
+                <div className="col-xs-4 col-xs-offset-4">
                     <input className="form-control" type="text" placeholder="Email" ref="email" />
                     <input className="form-control" type="password" placeholder="Password" ref="pass" />
                     <button className="btn btn-primary" onClick={this.doLogin}>
