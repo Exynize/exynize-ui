@@ -39,6 +39,14 @@ body {
     margin-top: 10px;
 }
 
+.row-margin-bottom {
+    margin-bottom: 10px;
+}
+
+.label-margined {
+    margin-right: 5px;
+}
+
 #container > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -74,4 +82,16 @@ body {
 .input-error-text {
     position: fixed;
     margin-top: -4px;
+}
+
+.user {
+    font-weight: bold;
+}
+
+.component {
+    font-weight: bold;
+}
+
+.user-self {
+    color: #303F9F;
 }
