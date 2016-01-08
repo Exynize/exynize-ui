@@ -11,8 +11,8 @@ import Login from './pages/login';
 import Logout from './pages/logout';
 import ComponentsCatalogue from './pages/componentsCatalogue';
 import PipelinesCatalogue from './pages/pipelinesCatalogue';
-import NewComponent from './pages/newcomponent';
-import NewPipeline from './pages/newpipeline';
+import Component from './pages/component';
+import Pipeline from './pages/pipeline';
 
 export default [
     <IndexRoute key="home" name="home" component={Home} onEnter={requireAuth} />,
@@ -20,9 +20,9 @@ export default [
     <Route key="login" path="/login" component={Login}/>,
     <Route key="logout" path="/logout" component={Logout}/>,
     <Route key="admin" path="/admin" component={Admin} onEnter={requireAdminAuth} />,
-    <Route key="allcomponents" path="/allcomponents" component={ComponentsCatalogue} onEnter={requireAuth} />,
-    <Route key="allpipelines" path="/allpipelines" component={PipelinesCatalogue} onEnter={requireAuth} />,
-    <Route key="newcomponent" path="/newcomponent" component={NewComponent} onEnter={requireAuth} />,
-    <Route key="newpipeline" path="/newpipeline" component={NewPipeline} onEnter={requireAuth} />,
+    <Route key="components" path="/components" component={ComponentsCatalogue} onEnter={requireAuth} />,
+    <Route key="pipelines" path="/pipelines" component={PipelinesCatalogue} onEnter={requireAuth} />,
+    <Route key="component" path="/component/:user(/:component)" component={Component} onEnter={requireAuth} />,
+    <Route key="pipeline" path="/pipeline/:user(/:pipeline)" component={Pipeline} onEnter={requireAuth} />,
     <Route key="notfound" path="*" component={NotFound}/>,
 ];

@@ -17,20 +17,18 @@ const ComponentEditor = React.createClass({
 
     getDefaultProps() {
         return {
-            component: {
-                name: 'My new component',
-                description: 'My new component description',
-                source: defaultFunction,
-                version: '1.0.0',
-                isPublic: false,
-                isSourcePublic: false,
-            },
+            name: 'My new component',
+            description: 'My new component description',
+            source: defaultFunction,
+            version: '1.0.0',
+            isPublic: false,
+            isSourcePublic: false,
         };
     },
 
     getInitialState() {
         // get component from props
-        const component = this.props.component;
+        const component = {...this.props};
         // generate test id
         component.testId = uuid.v4();
 
@@ -49,6 +47,11 @@ const ComponentEditor = React.createClass({
             createResult: {},
             testExpanded: false,
         };
+    },
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({...nextProps});
+        this.editor.setValue(nextProps.source);
     },
 
     componentDidMount() {

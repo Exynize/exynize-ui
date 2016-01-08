@@ -5,6 +5,7 @@ const compState = fromJS({
     testResult: {},
     createResult: false,
     components: [],
+    component: {},
 });
 
 export default compState;

@@ -6,14 +6,15 @@ import {apiBase} from '../config';
 import {signRequest} from '../auth';
 import {createNotification} from '../notifications';
 
-const getComponent = createAction();
+const getComponents = createAction();
 
-const stream = getComponent.$
+const stream = getComponents.$
+    .map(() => ({}))
     .map(signRequest)
     .flatMap(data =>
         request
-        .get(apiBase + `/api/component/${data.user}/${data.component}`)
-        .query({token: data.token})
+        .get(apiBase + '/api/components')
+        .query(data)
         .observe()
         .map(res => res.body)
         .catch(e => {
@@ -22,8 +23,8 @@ const stream = getComponent.$
         })
     )
     .map(data => fromJS({
-        component: data,
+        components: data,
     }));
 
-export {getComponent};
+export {getComponents};
 export default stream;

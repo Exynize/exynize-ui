@@ -1,6 +1,5 @@
 import React from 'react';
-import {History} from 'react-router';
-import {Row} from '../../components/bootstrap';
+import {Link, History} from 'react-router';
 import {RxState} from '../../stores/util';
 import componentStore, {getComponents} from '../../stores/component';
 import authStore from '../../stores/auth';
@@ -30,22 +29,15 @@ const ComponentsCatalogue = React.createClass({
                     </div>
                     {this.state.components.map(c => c.toJS()).map(c => (
                         <div className="row row-margin-bottom" key={'component_' + c.id}>
-                            {c.user.id === this.state.user.id ? (
-                            <button
-                                className="btn btn-warning btn-xs pull-right"
-                                onClick={this.handleComponentEdit.bind(this, c)}>
-                                Edit
-                            </button>
-                            ) : ''}
-                            <a href={`/user/${c.user.username}`}
+                            <Link to={`/user/${c.user.username}`}
                                 className={'user ' + (c.user.id === this.state.user.id ? 'user-self' : '')}>
                                 @{c.user.username}
-                            </a>
+                            </Link>
                             &nbsp;/&nbsp;
-                            <a href={`/component/${c.user.username}/${c.refName}`}
+                            <Link to={`/component/${c.user.username}/${c.refName}`}
                                 className="component">
                                 {c.name}
-                            </a>
+                            </Link>
                             <div className="text-muted">
                                 <span className="label label-info label-margined">{c.type}</span>
                                 <span className="label label-default label-margined">
