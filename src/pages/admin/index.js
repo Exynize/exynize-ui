@@ -34,11 +34,13 @@ const Admin = React.createClass({
     render() {
         return (
             <div className="row">
-                <div className="col-xs-12">
-                    <h3>Users:</h3>
+                <div className="col-xs-8 col-xs-offset-2">
+                    <div className="page-header">
+                        <h3>Users</h3>
+                    </div>
                     <div className="row">
                     {this.state.users.map(user => (
-                        <div className="col-xs-6 list-group" key={user.get('id')}>
+                        <div className="col-xs-4" key={user.get('id')}>
                             <div className="list-group-item">
                                 <div className="row-picture">
                                     <img
@@ -46,9 +48,9 @@ const Admin = React.createClass({
                                         src={`http://www.gravatar.com/avatar/${md5(user.get('email'))}`} />
                                 </div>
                                 <div className="row-content">
-                                    <h4 className="list-group-item-heading">
-                                        {user.get('name')} &lt;{user.get('email')}&gt;
-                                    </h4>
+                                    <h5 className="list-group-item-heading">
+                                        {user.get('username')} &lt;{user.get('email')}&gt;
+                                    </h5>
                                     <div className="list-group-item-text">
                                         <Checkbox
                                             label="Email validated"
