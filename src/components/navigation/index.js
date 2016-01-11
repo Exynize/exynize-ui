@@ -5,10 +5,10 @@ import {RxState} from '../../stores/util';
 
 const authedMenu = [
     <li key="newcomponent">
-        <Link activeClassName="active" to="/component/new" state={{}}>Create component</Link>
+        <Link activeClassName="active" to="/component/new">Create component</Link>
     </li>,
     <li key="newpipeline">
-        <Link activeClassName="active" to="/pipeline/new" state={{}}>Create pipeline</Link>
+        <Link activeClassName="active" to="/pipeline/new">Create pipeline</Link>
     </li>,
     <li key="allcomponents">
         <Link activeClassName="active" to="/components">Browse components</Link>
