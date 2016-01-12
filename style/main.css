@@ -9,6 +9,10 @@ body {
     background-color: #0c7cd5;
 }
 
+.panel-title > a {
+    color: #2196f3;
+}
+
 .label {
     font-size: 85%;
 }
@@ -45,6 +49,10 @@ body {
 
 .row-margin-bottom {
     margin-bottom: 10px;
+}
+
+.pipeline {
+    margin-bottom: 40px;
 }
 
 .label-margined {
@@ -100,10 +108,20 @@ body {
     font-weight: bold;
 }
 
-.user-self {
+.user-self, .panel-title > a.user-self {
     color: #303F9F;
 }
 
 .no-bottom-padding {
     padding-bottom: 0;
+}
+
+.panel-short {
+    margin-bottom: 0;
+}
+
+.row-separator {
+    margin-bottom: 0;
+    text-align: center;
+    width: 100%;
 }

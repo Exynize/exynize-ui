@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Component from '../../components/component';
 import {RxState} from '../../stores/util';
 import componentStore, {getComponents} from '../../stores/component';
 import authStore from '../../stores/auth';
@@ -24,30 +25,7 @@ const ComponentsCatalogue = React.createClass({
                         <h3>Components catalogue</h3>
                     </div>
                     {this.state.components.map(c => c.toJS()).map(c => (
-                        <div className="row row-margin-bottom" key={'component_' + c.id}>
-                            <Link to={`/user/${c.user.username}`}
-                                className={'user ' + (c.user.id === this.state.user.id ? 'user-self' : '')}>
-                                @{c.user.username}
-                            </Link>
-                            &nbsp;/&nbsp;
-                            <Link to={`/component/${c.user.username}/${c.refName}`}
-                                className="component">
-                                {c.name}
-                            </Link>
-                            <div className="text-muted">
-                                <span className="label label-info label-margined">{c.type}</span>
-                                <span className="label label-default label-margined">
-                                    {c.isPublic ? 'public' : 'private'}
-                                </span>
-                                <span className="label label-default label-margined">
-                                    {c.isSourcePublic ? 'public' : 'private'} source
-                                </span>
-                            </div>
-                            <p>{c.description}</p>
-                            {c.source ? (
-                            <pre style={{marginTop: 10}}>{c.source}</pre>
-                            ) : ''}
-                        </div>
+                        <Component key={c.id} {...c} authUser={this.state.user} />
                     ))}
                 </div>
             </div>
