@@ -21,8 +21,8 @@ const ComponentsCatalogue = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-8 col-xs-offset-2">
-                    <div className="page-header">
-                        <h3>Components catalogue</h3>
+                    <div className="page-header page-header-slim">
+                        <h4>Components catalogue</h4>
                     </div>
                     {this.state.components.map(c => c.toJS()).map(c => (
                         <Component key={c.id} {...c} authUser={this.state.user} />

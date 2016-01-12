@@ -45,8 +45,8 @@ const PipelinesCatalogue = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-8 col-xs-offset-2">
-                    <div className="page-header">
-                        <h3>Pipelines catalogue</h3>
+                    <div className="page-header page-header-slim">
+                        <h4>Pipelines catalogue</h4>
                     </div>
                     {this.state.pipelines.map(p => (
                     <div className="row pipeline" key={'pipeline_' + p.id}>

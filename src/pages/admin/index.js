@@ -35,8 +35,8 @@ const Admin = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-8 col-xs-offset-2">
-                    <div className="page-header">
-                        <h3>Users</h3>
+                    <div className="page-header page-header-slim">
+                        <h4>Users</h4>
                     </div>
                     <div className="row">
                     {this.state.users.map(user => (
