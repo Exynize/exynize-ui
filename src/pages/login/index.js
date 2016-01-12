@@ -26,18 +26,52 @@ const Login = React.createClass({
         resetPassword({email});
     },
 
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.doLogin();
+        }
+    },
+
     render() {
         return (
             <div className="row">
                 <div className="col-xs-4 col-xs-offset-4">
-                    <input className="form-control" type="text" placeholder="Email" ref="email" />
-                    <input className="form-control" type="password" placeholder="Password" ref="pass" />
-                    <button className="btn btn-primary" onClick={this.doLogin}>
-                        Login
-                    </button>
-                    <button className="btn btn-link pull-right" onClick={this.doReset}>
-                        Reset password
-                    </button>
+                    <div className="panel panel-default">
+                        <div className="panel-body form-horizontal">
+                            <div className="form-group">
+                                <label className="control-label col-lg-2" htmlFor="email">
+                                    Email
+                                </label>
+                                <div className="col-lg-10">
+                                    <input
+                                        autoFocus
+                                        className="form-control"
+                                        type="text"
+                                        id="email"
+                                        ref="email"
+                                        onKeyPress={this.handleKeyPress} />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="control-label col-lg-2" htmlFor="email">
+                                    Password
+                                </label>
+                                <div className="col-lg-10">
+                                    <input
+                                        className="form-control"
+                                        type="password"
+                                        ref="pass"
+                                        onKeyPress={this.handleKeyPress} />
+                                </div>
+                            </div>
+                            <button className="btn btn-link row-margin-top" onClick={this.doReset}>
+                                Reset password
+                            </button>
+                            <button className="btn btn-primary pull-right row-margin-top" onClick={this.doLogin}>
+                                Login
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
