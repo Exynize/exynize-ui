@@ -40,30 +40,82 @@ const Register = React.createClass({
         }
     },
 
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.register();
+        }
+    },
+
     render() {
         return (
             <div className="row">
                 <div className="col-xs-4 col-xs-offset-4">
-                    {this.state.error ? (
-                        <div className="alert alert-danger">{this.state.error}</div>
-                    ) : ''}
-                    <input className="form-control" type="text" placeholder="Email" ref="email" />
-                    <input className="form-control" type="text" placeholder="Username" ref="username" />
-                    <input
-                        className="form-control"
-                        type="password"
-                        placeholder="Password"
-                        ref="pass"
-                        onChange={this.resetError} />
-                    <input
-                        className="form-control"
-                        type="password"
-                        placeholder="Repeat password"
-                        ref="passRepeat"
-                        onChange={this.resetError} />
-                    <button className="btn btn-primary" onClick={this.register}>
-                        Register
-                    </button>
+                    <div className="panel panel-default">
+                        <div className="panel-body form-horizontal">
+                            <div className="form-group">
+                                <label className="control-label col-lg-2" htmlFor="email">
+                                    Email
+                                </label>
+                                <div className="col-lg-10">
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        autoFocus
+                                        ref="email"
+                                        id="email"
+                                        onKeyPress={this.handleKeyPress} />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="control-label col-lg-2" htmlFor="username">
+                                    Username
+                                </label>
+                                <div className="col-lg-10">
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        id="username"
+                                        ref="username"
+                                        onKeyPress={this.handleKeyPress} />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="control-label col-lg-2" htmlFor="pass">
+                                    Password
+                                </label>
+                                <div className="col-lg-10">
+                                    <input
+                                        className="form-control"
+                                        type="password"
+                                        ref="pass"
+                                        id="pass"
+                                        onChange={this.resetError}
+                                        onKeyPress={this.handleKeyPress} />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="control-label col-lg-2" htmlFor="passRepeat">
+                                    Password again
+                                </label>
+                                <div className="col-lg-10">
+                                    <input
+                                        className="form-control"
+                                        type="password"
+                                        ref="passRepeat"
+                                        id="passRepeat"
+                                        onChange={this.resetError}
+                                        onKeyPress={this.handleKeyPress} />
+                                </div>
+                            </div>
+                            {this.state.error ? (
+                                <div className="alert alert-danger">{this.state.error}</div>
+                            ) : (
+                                <button className="btn btn-primary pull-right" onClick={this.register}>
+                                    Register
+                                </button>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         );
