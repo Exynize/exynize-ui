@@ -13,6 +13,10 @@ body {
     font-size: 85%;
 }
 
+.label-mini {
+    font-size: 50%;
+}
+
 .component-header {
     margin-bottom: 10px;
     padding-right: 15px !important;
@@ -45,6 +49,10 @@ body {
 
 .label-margined {
     margin-right: 5px;
+}
+
+.padded-top-header {
+    padding-top: 10px;
 }
 
 #container > .container-fluid {

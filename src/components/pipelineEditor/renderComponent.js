@@ -22,13 +22,15 @@ const noSource = function() {
 const renderRendererComponent = function() {
     if (this.state.rendererComponent) {
         return (
-            <div className="well">
-            {renderComponent.call(
-                this,
-                this.state.rendererComponent,
-                this.handleRendererComponent.bind(this, undefined),
-                'Deselect'
-            )}
+            <div className="well row">
+                <div className="col-xs-12">
+                {renderComponent.call(
+                    this,
+                    this.state.rendererComponent,
+                    this.handleRendererComponent.bind(this, undefined),
+                    'Deselect'
+                )}
+                </div>
             </div>
         );
     }

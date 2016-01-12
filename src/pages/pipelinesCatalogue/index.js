@@ -1,15 +1,17 @@
 import React from 'react';
-import {History} from 'react-router';
+import {Link, History} from 'react-router';
 import {apiUri} from '../../stores/config';
 import {Row, Modal} from '../../components/bootstrap';
 import {RxState} from '../../stores/util';
 import pipelineStore, {getPipelines, startPipeline, stopPipeline, getPipelineLog} from '../../stores/pipeline';
+import authStore from '../../stores/auth';
 
 const PipelinesCatalogue = React.createClass({
     mixins: [History, RxState],
     stores: {
         pipelines: pipelineStore.map(s => s.get('pipelines')),
         pipelineLog: pipelineStore.map(s => s.get('pipelineLog')),
+        user: authStore.map(s => s.get('user').toJS()),
     },
 
     getInitialState() {
@@ -32,10 +34,6 @@ const PipelinesCatalogue = React.createClass({
     },
     closePipelineLog() {
         this.setState({pipelineLog: null});
-    },
-
-    editPipeline(pipeline) {
-        this.history.pushState({pipeline}, '/newpipeline');
     },
 
     render() {
@@ -76,9 +74,10 @@ const PipelinesCatalogue = React.createClass({
                                 Stop
                             </button>
                         ) : ''}
-                        <button className="btn btn-warning pull-right" onClick={this.editPipeline.bind(this, p)}>
+                        <Link className="btn btn-warning pull-right"
+                            to={`/pipeline/${p.user.username}/${p.refName}`}>
                             Edit
-                        </button>
+                        </Link>
                     </div>
                     ))}
 
