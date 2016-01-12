@@ -40,7 +40,7 @@ const Admin = React.createClass({
                     </div>
                     <div className="row">
                     {this.state.users.map(user => (
-                        <div className="col-xs-4" key={user.get('id')}>
+                        <div className="col-xs-4 user-item" key={user.get('id')}>
                             <div className="list-group-item">
                                 <div className="row-picture">
                                     <img
