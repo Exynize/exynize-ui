@@ -3,9 +3,9 @@ import renderComponent from './component';
 import renderComponentSelector from './componentSelector';
 
 const processorComponentsSelector = function() {
-    const comps = this.state.components
+    const comps = this.state.allComponents
         .filter(c => c.type === 'processor')
-        .filter(c => this.state.processors.indexOf(c) === -1);
+        .filter(c => this.state.components.filter(sc => sc.id === c.id).length === 0);
     return renderComponentSelector.call(this, comps, this.handleProcessorComponent);
 };
 
@@ -27,8 +27,8 @@ const renderProcessors = function() {
             <div className="col-xs-12">
                 <div className="well row">
                     <div className="col-xs-12">
-                    {this.state.processors.length > 0 ?
-                        this.state.processors.map(c =>
+                    {this.state.components.length > 0 ?
+                        this.state.components.map(c =>
                             renderComponent.call(
                                 this,
                                 c,

@@ -6,14 +6,15 @@ import {apiBase} from '../config';
 import {signRequest} from '../auth';
 import {createNotification} from '../notifications';
 
-const getPipeline = createAction();
+const getPipelines = createAction();
 
-const stream = getPipeline.$
+const stream = getPipelines.$
+    .map(() => ({}))
     .map(signRequest)
     .flatMap(data =>
         request
-        .get(apiBase + `/api/pipes/${data.user}/${data.pipeline}`)
-        .query({token: data.token})
+        .get(apiBase + '/api/pipes')
+        .query(data)
         .observe()
         .map(res => res.body)
         .catch(e => {
@@ -22,8 +23,8 @@ const stream = getPipeline.$
         })
     )
     .map(data => fromJS({
-        pipeline: data,
+        pipelines: data,
     }));
 
-export {getPipeline};
+export {getPipelines};
 export default stream;

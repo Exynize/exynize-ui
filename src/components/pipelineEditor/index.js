@@ -9,7 +9,7 @@ import render from './template';
 const PipelineEditor = React.createClass({
     mixins: [RxState],
     stores: {
-        components: componentStore.map(s => s.get('components').toJS()),
+        allComponents: componentStore.map(s => s.get('components').toJS()),
         testResult: pipelineStore.map(s => s.get('testResult')),
         user: authStore.map(s => s.get('user').toJS()),
     },
@@ -19,7 +19,7 @@ const PipelineEditor = React.createClass({
             name: 'My new pipeline',
             source: null,
             components: [],
-            renderComponent: null,
+            render: null,
             isPublic: false,
             isSourcePublic: false,
         };
@@ -43,16 +43,16 @@ const PipelineEditor = React.createClass({
         }
         // return
         return {
-            id: pipeline.id,
-            name: pipeline.name,
-            sourceComponent: pipeline.source,
+            ...pipeline,
             sourceComponentSelect: false,
-            processors: pipeline.components.map(adjustParams),
             processorComponentsSelect: false,
-            rendererComponent: pipeline.render,
             rendererComponentSelect: false,
             testResult: fromJS({}),
         };
+    },
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({...nextProps});
     },
 
     handleSelectSourceComponent() {
@@ -69,19 +69,19 @@ const PipelineEditor = React.createClass({
         this.forceUpdate();
     },
 
-    handleSourceComponent(sourceComponent) {
-        this.setState({sourceComponent, sourceComponentSelect: false});
+    handleSourceComponent(source) {
+        this.setState({source, sourceComponentSelect: false});
     },
-    handleRendererComponent(rendererComponent) {
-        this.setState({rendererComponent, rendererComponentSelect: false});
+    handleRendererComponent(renderComponent) {
+        this.setState({render: renderComponent, rendererComponentSelect: false});
     },
     handleProcessorComponent(component) {
-        const processors = this.state.processors.concat([component]);
-        this.setState({processors});
+        const components = this.state.components.concat([component]);
+        this.setState({components});
     },
     handleProcessorComponentDeselect(component) {
-        const processors = this.state.processors.filter(c => c !== component);
-        this.setState({processors});
+        const components = this.state.components.filter(c => c !== component);
+        this.setState({components});
     },
     handleParamChange(component, paramName, e) {
         if (!component.paramValues) {
@@ -95,7 +95,7 @@ const PipelineEditor = React.createClass({
 
     testPipeline(e) {
         e.preventDefault();
-        const components = this.state.processors.map(
+        const components = this.state.components.map(
             ({source, params = [], paramValues = {}}) => ({
                 source,
                 args: params.map(name => paramValues[name]),
@@ -103,8 +103,8 @@ const PipelineEditor = React.createClass({
         );
         const pipeline = {
             source: {
-                source: this.state.sourceComponent.source,
-                args: this.state.sourceComponent.params.map(name => this.state.sourceComponent.paramValues[name]),
+                source: this.state.source.source,
+                args: this.state.source.params.map(name => this.state.source.paramValues[name]),
             },
             components,
         };
@@ -118,18 +118,18 @@ const PipelineEditor = React.createClass({
 
     savePipeline(e) {
         e.preventDefault();
-        const components = this.state.processors.map(({id, params = [], paramValues = {}}) => ({
+        const components = this.state.components.map(({id, params = [], paramValues = {}}) => ({
             id,
             args: params.map(name => paramValues[name]),
         }));
         const pipeline = {
             source: {
-                id: this.state.sourceComponent.id,
-                args: this.state.sourceComponent.params.map(name => this.state.sourceComponent.paramValues[name]),
+                id: this.state.source.id,
+                args: this.state.source.params.map(name => this.state.source.paramValues[name]),
             },
             components,
             render: {
-                id: this.state.rendererComponent ? this.state.rendererComponent.id : '-1',
+                id: this.state.render ? this.state.render.id : '-1',
             },
             name: this.state.name,
             isPublic: true,

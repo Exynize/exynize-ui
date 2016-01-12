@@ -3,7 +3,7 @@ import renderComponent from './component';
 import renderComponentSelector from './componentSelector';
 
 const sourceComponentSelector = function() {
-    const comps = this.state.components.filter(c => c.type === 'source');
+    const comps = this.state.allComponents.filter(c => c.type === 'source');
     return renderComponentSelector.call(this, comps, this.handleSourceComponent);
 };
 
@@ -20,13 +20,13 @@ const noSource = function() {
 };
 
 const renderSource = function() {
-    if (this.state.sourceComponent) {
+    if (this.state.source) {
         return (
             <div className="well row">
                 <div className="col-xs-12">
                 {renderComponent.call(
                     this,
-                    this.state.sourceComponent,
+                    this.state.source,
                     this.handleSourceComponent.bind(this, undefined),
                     'Deselect'
                 )}
