@@ -53,7 +53,7 @@ const Login = React.createClass({
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="control-label col-lg-2" htmlFor="email">
+                                <label className="control-label col-lg-2" htmlFor="pass">
                                     Password
                                 </label>
                                 <div className="col-lg-10">
@@ -61,6 +61,7 @@ const Login = React.createClass({
                                         className="form-control"
                                         type="password"
                                         ref="pass"
+                                        id="pass"
                                         onKeyPress={this.handleKeyPress} />
                                 </div>
                             </div>
