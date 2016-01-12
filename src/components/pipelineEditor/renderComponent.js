@@ -22,7 +22,7 @@ const noSource = function() {
 const renderRendererComponent = function() {
     if (this.state.render) {
         return (
-            <div className="well row">
+            <div className="well row no-bottom-padding">
                 <div className="col-xs-12">
                 {renderComponent.call(
                     this,

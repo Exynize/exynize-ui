@@ -103,3 +103,7 @@ body {
 .user-self {
     color: #303F9F;
 }
+
+.no-bottom-padding {
+    padding-bottom: 0;
+}

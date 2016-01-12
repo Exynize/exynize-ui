@@ -25,7 +25,7 @@ const renderProcessors = function() {
     return (
         <div className="row">
             <div className="col-xs-12">
-                <div className="well row">
+                <div className="well row no-bottom-padding">
                     <div className="col-xs-12">
                     {this.state.components.length > 0 ?
                         this.state.components.map(c =>

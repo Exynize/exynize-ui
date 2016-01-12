@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 const renderComponent = function(c: Object, handleComponent: Function, selectLabel: string = 'Select') {
     return (
-        <div className="row row-margin-bottom" key={'component_' + c.id}>
+        <div className="row" key={'component_' + c.id}>
             <Link to={`/user/${c.user.username}`}
                 className={'user ' + (c.user.id === this.state.user.id ? 'user-self' : '')}>
                 @{c.user.username}
@@ -40,7 +40,7 @@ const renderComponent = function(c: Object, handleComponent: Function, selectLab
                     placeholder={paramName} />
             </div>
             ))) : ''}
-            <p>{c.description}</p>
+            <p className="row-margin-top">{c.description}</p>
             {c.showSource ? (
             <pre style={{marginTop: 10}}>{c.source}</pre>
             ) : ''}
