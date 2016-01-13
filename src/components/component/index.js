@@ -13,7 +13,7 @@ const Component = (props) => (
                     @{props.user.username}
                 </Link>
                 &nbsp;/&nbsp;
-                <Link to={`/pipeline/${props.user.username}/${props.refName}`}
+                <Link to={`/component/${props.user.username}/${props.refName}`}
                     className="component">
                     {props.name}
                 </Link>
