@@ -6,6 +6,7 @@ const newComponent = createAction();
 const stream = newComponent.$
     .map(() => fromJS({
         component: {
+            id: undefined,
             name: 'My new component',
             description: 'My new component description',
             source: `export default (data) => {

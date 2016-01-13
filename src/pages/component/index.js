@@ -15,27 +15,25 @@ const Component = React.createClass({
     },
 
     getInitialState() {
+        // trigger initial component load
+        this.updateComponent(this.props);
         // return
-        return this.updateComponent(this.props);
+        return {component: undefined};
     },
 
     componentWillReceiveProps(nextProps) {
-        this.setState(this.updateComponent(nextProps));
+        this.updateComponent(nextProps);
     },
 
     updateComponent(props) {
-        let component = props.location.state ? props.location.state.component : undefined;
         // clear if new route
-        if (this.props.params.user === 'new') {
-            component = undefined;
-            newComponent();
+        if (props.params.user === 'new') {
+            return newComponent();
         }
         // if user and component name present - get component from server
-        if (this.props.params.user && this.props.params.component) {
-            component = undefined;
-            this.getComponent(this.props.params);
+        if (props.params.user && props.params.component) {
+            return this.getComponent(this.props.params);
         }
-        return {component};
     },
 
     getComponent({user, component}) {
