@@ -21,6 +21,7 @@ logoutStream.subscribe(authSubject);
 
 // create result store stream
 const auth = authSubject
+    .startWith(defaultState)
     .scan((state, newData) => state.merge(newData), defaultState);
 
 export let currentState = defaultState;

@@ -7,7 +7,9 @@ const Component = React.createClass({
     mixins: [RxState],
 
     stores: {
-        component: componentStore.map(s => s.get('component').toJS()),
+        component: componentStore
+            .filter(s => s.get('component').count() > 0) // only work with non-null components
+            .map(s => s.get('component').toJS()),
     },
 
     getInitialState() {

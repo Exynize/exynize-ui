@@ -83,17 +83,17 @@ const ComponentEditor = React.createClass({
     },
 
     handleCodeChange() {
-        const code = this.editor.getValue();
+        const source = this.editor.getValue();
         let codeAnalysis = {};
         try {
-            codeAnalysis = analyseCode(code);
+            codeAnalysis = analyseCode(source);
         } catch (e) {
             codeAnalysis = {
                 ...this.state.codeAnalysis,
                 error: e.toString(),
             };
         }
-        this.setState({code, codeAnalysis});
+        this.setState({source, codeAnalysis});
     },
     handleName(e) {
         this.setState({name: e.target.value});
@@ -120,11 +120,11 @@ const ComponentEditor = React.createClass({
         e.preventDefault();
         this.setState({testResult: {}, testExpanded: true});
         const args = this.state.codeAnalysis.testParams.map(name => this.refs[name].value);
-        const {testId} = this.state;
+        const {source, testId} = this.state;
         testComponent({
             id: testId,
             args,
-            source: this.state.source,
+            source,
             componentType: this.state.codeAnalysis.componentType,
         });
     },
