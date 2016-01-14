@@ -50,7 +50,7 @@ const ComponentEditor = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        this.setState({...nextProps});
+        this.setState({...nextProps, testResult: {}});
         this.editor.setValue(nextProps.source);
     },
 
