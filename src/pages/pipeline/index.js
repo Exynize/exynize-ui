@@ -6,25 +6,37 @@ import pipelineStore, {getPipeline} from '../../stores/pipeline';
 const Pipeline = React.createClass({
     mixins: [RxState],
     stores: {
-        pipeline: pipelineStore.map(s => s.get('pipeline').toJS()),
+        pipeline: pipelineStore
+            .map(s => s.get('pipeline'))
+            .filter(c => c.count() > 0) // only work with non-null pipelines
+            .distinctUntilChanged() // only update when pipleine changed
+            .map(s => s.toJS()),
     },
 
     getInitialState() {
-        let pipeline = this.props.location.state ? this.props.location.state.pipeline : undefined;
-        // clear if new route
-        if (this.props.params.user === 'new') {
-            pipeline = undefined;
-        }
-        // if user and component name present - get component from server
-        if (this.props.params.user && this.props.params.pipeline) {
-            pipeline = undefined;
-            this.getPipeline(this.props.params);
-        }
+        // trigger initial component load
+        this.updatePipeline(this.props);
         // return
         return {
-            pipeline,
+            pipeline: undefined,
         };
     },
+
+    componentWillReceiveProps(nextProps) {
+        this.updateComponent(nextProps);
+    },
+
+    updatePipeline(props) {
+        // clear if new route
+        if (props.params.user === 'new') {
+            return;
+        }
+        // if user and component name present - get component from server
+        if (props.params.user && props.params.component) {
+            this.getPipeline(props.params);
+        }
+    },
+
 
     getPipeline({user, pipeline}) {
         getPipeline({user, pipeline});
