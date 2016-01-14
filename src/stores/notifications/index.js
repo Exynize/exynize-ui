@@ -14,7 +14,6 @@ deleteStream.subscribe(notificationsSubject);
 
 // create result store stream
 const notifications = notificationsSubject
-    .startWith(defaultState)
     .scan((state, data) => {
         const notification = data.get('notification');
         const action = data.get('action');
@@ -29,6 +28,9 @@ const notifications = notificationsSubject
 
         return state.push(notification);
     }, defaultState);
+
+// dispatch default state
+notificationsSubject.onNext(defaultState);
 
 export {createNotification, deleteNotification};
 export default notifications;

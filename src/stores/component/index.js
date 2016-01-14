@@ -20,8 +20,10 @@ newComponentStream.subscribe(componentsSubject);
 
 // create result store stream
 const components = componentsSubject
-    .startWith(defaultState)
     .scan((state, newData) => state.merge(newData), defaultState);
+
+// dispatch default state
+componentsSubject.onNext(defaultState);
 
 export {testComponent, createComponent, getComponents, getComponent, newComponent};
 export default components;

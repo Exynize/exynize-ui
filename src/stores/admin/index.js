@@ -14,8 +14,10 @@ updateUserStream.subscribe(adminSubject);
 
 // create resulting store stream
 const admin = adminSubject
-    .startWith(defaultState)
     .scan((state, newData) => state.merge(newData), defaultState);
+
+// dispatch default state
+adminSubject.onNext(defaultState);
 
 export {getUsers, updateUser};
 export default admin;

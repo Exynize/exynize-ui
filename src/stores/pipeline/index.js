@@ -24,8 +24,10 @@ getStream.subscribe(pipelinesSubject);
 
 // create result store stream
 const pipelines = pipelinesSubject
-    .startWith(defaultState)
     .scan((state, newData) => state.merge(newData), defaultState);
+
+// dispatch default state
+pipelinesSubject.onNext(defaultState);
 
 export {testPipeline, createPipeline, getPipelines, startPipeline, stopPipeline, getPipelineLog, getPipeline};
 export default pipelines;

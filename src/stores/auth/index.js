@@ -21,8 +21,10 @@ logoutStream.subscribe(authSubject);
 
 // create result store stream
 const auth = authSubject
-    .startWith(defaultState)
     .scan((state, newData) => state.merge(newData), defaultState);
+
+// dispatch default state
+authSubject.onNext(defaultState);
 
 export let currentState = defaultState;
 auth.subscribe(state => currentState = state);
