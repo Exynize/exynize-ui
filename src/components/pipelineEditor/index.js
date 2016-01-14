@@ -73,7 +73,9 @@ const PipelineEditor = React.createClass({
         this.setState({source, sourceComponentSelect: false});
     },
     handleRendererComponent(renderComponent) {
-        this.setState({render: renderComponent, rendererComponentSelect: false});
+        // TODO: put back to setState once react-hmr bug is fixed
+        const s = {render: renderComponent, rendererComponentSelect: false};
+        this.setState(s);
     },
     handleProcessorComponent(component) {
         const components = this.state.components.concat([component]);
