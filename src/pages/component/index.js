@@ -32,7 +32,7 @@ const Component = React.createClass({
         }
         // if user and component name present - get component from server
         if (props.params.user && props.params.component) {
-            return this.getComponent(this.props.params);
+            return this.getComponent(props.params);
         }
     },
 
