@@ -29,10 +29,18 @@ const Component = (props) => (
                 <span className="label label-default label-margined">
                     {props.isSourcePublic ? 'public' : 'private'} source
                 </span>
+                {props.toggleSource && props.source ? (
+                <button className="btn btn-default btn-xs btn-margin-left" onClick={props.toggleSource}>
+                    <span className={'glyphicon glyphicon-' + (props.showSource ? 'minus' : 'plus')} />
+                    &nbsp;{props.showSource ? 'Hide' : 'Show'} source
+                </button>
+                ) : ''}
+                {props.actionButtons}
             </div>
             )}
+            {props.additionalInfo}
             <p className="padded-top-header">{props.description}</p>
-            {!props.short && props.source ? (
+            {!props.short && props.source && (!props.toggleSource || props.showSource) ? (
             <pre style={{marginTop: 10}}>{props.source}</pre>
             ) : ''}
         </div>

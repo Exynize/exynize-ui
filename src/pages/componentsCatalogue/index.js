@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import Component from '../../components/component';
 import {RxState} from '../../stores/util';
 import componentStore, {getComponents} from '../../stores/component';
@@ -8,13 +7,18 @@ import authStore from '../../stores/auth';
 const ComponentsCatalogue = React.createClass({
     mixins: [RxState],
     stores: {
-        components: componentStore.map(s => s.get('components')),
+        components: componentStore.map(s => s.get('components').toJS()),
         user: authStore.map(s => s.get('user').toJS()),
     },
 
     getInitialState() {
         getComponents();
         return {components: [], user: {}};
+    },
+
+    handleSourceToggle(comp) {
+        comp.showSource = !comp.showSource;
+        this.forceUpdate();
     },
 
     render() {
@@ -24,8 +28,12 @@ const ComponentsCatalogue = React.createClass({
                     <div className="page-header page-header-slim">
                         <h4>Components catalogue</h4>
                     </div>
-                    {this.state.components.map(c => c.toJS()).map(c => (
-                        <Component key={c.id} {...c} authUser={this.state.user} />
+                    {this.state.components.map(c => (
+                        <Component
+                            {...c}
+                            key={c.id}
+                            authUser={this.state.user}
+                            toggleSource={this.handleSourceToggle.bind(this, c)} />
                     ))}
                 </div>
             </div>
