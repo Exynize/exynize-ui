@@ -1,8 +1,8 @@
 import React from 'react';
-import Component from '../../components/component';
 import {RxState} from '../../stores/util';
 import componentStore, {getComponents} from '../../stores/component';
 import authStore from '../../stores/auth';
+import ComponentSelector from '../../components/componentSelector';
 
 const ComponentsCatalogue = React.createClass({
     mixins: [RxState],
@@ -13,12 +13,11 @@ const ComponentsCatalogue = React.createClass({
 
     getInitialState() {
         getComponents();
-        return {components: [], user: {}};
-    },
-
-    handleSourceToggle(comp) {
-        comp.showSource = !comp.showSource;
-        this.forceUpdate();
+        return {
+            components: [],
+            user: {},
+            pageSize: 5,
+        };
     },
 
     render() {
@@ -28,13 +27,7 @@ const ComponentsCatalogue = React.createClass({
                     <div className="page-header page-header-slim">
                         <h4>Components catalogue</h4>
                     </div>
-                    {this.state.components.map(c => (
-                        <Component
-                            {...c}
-                            key={c.id}
-                            authUser={this.state.user}
-                            toggleSource={this.handleSourceToggle.bind(this, c)} />
-                    ))}
+                    <ComponentSelector {...this.state} />
                 </div>
             </div>
         );
