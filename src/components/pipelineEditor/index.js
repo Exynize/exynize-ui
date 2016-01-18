@@ -98,7 +98,8 @@ const PipelineEditor = React.createClass({
     testPipeline(e) {
         e.preventDefault();
         const components = this.state.components.map(
-            ({source, params = [], paramValues = {}}) => ({
+            ({id, isSourcePublic, source, params = [], paramValues = {}}) => ({
+                id: !isSourcePublic || !source ? id : undefined,
                 source,
                 args: params.map(name => paramValues[name]),
             })
