@@ -2,14 +2,8 @@ import React from 'react';
 import Component from '../../components/component';
 
 const render = function() {
-    const {currentPage, pageSize, search} = this.state;
-    const components = this.state.components
-        .filter(c =>
-            search.length === 0 ||
-            c.description.toLowerCase().includes(search.toLowerCase()) ||
-            c.name.toLowerCase().includes(search.toLowerCase()) ||
-            c.user.username.toLowerCase().includes(search.toLowerCase())
-        );
+    const {currentPage, pageSize} = this.state;
+    const components = this.displayedComponents();
     const pages = new Array(Math.ceil(components.length / pageSize)).fill(0);
 
     return (

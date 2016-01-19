@@ -30,6 +30,17 @@ const ComponentSelector = React.createClass({
         this.forceUpdate();
     },
 
+    displayedComponents() {
+        const search = this.state.search.toLowerCase();
+        return this.state.components
+            .filter(c =>
+                search.length === 0 ||
+                c.description.toLowerCase().includes(search) ||
+                c.name.toLowerCase().includes(search) ||
+                c.user.username.toLowerCase().includes(search)
+            );
+    },
+
     prevPage() {
         let {currentPage} = this.state;
         currentPage = currentPage >= 1 ? currentPage - 1 : currentPage;
@@ -37,7 +48,7 @@ const ComponentSelector = React.createClass({
     },
     nextPage() {
         let {currentPage} = this.state;
-        const maxPages = Math.ceil(this.state.components.length / this.state.pageSize);
+        const maxPages = Math.ceil(this.displayedComponents().length / this.state.pageSize);
         currentPage = currentPage < (maxPages - 1) ? currentPage + 1 : currentPage;
         this.setState({currentPage});
     },
@@ -46,7 +57,7 @@ const ComponentSelector = React.createClass({
     },
 
     handleSearch(e) {
-        this.setState({search: e.target.value});
+        this.setState({currentPage: 0, search: e.target.value});
     },
 
     render,
