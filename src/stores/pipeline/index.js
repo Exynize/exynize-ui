@@ -9,6 +9,7 @@ import startStream, {startPipeline} from './start';
 import stopStream, {stopPipeline} from './stop';
 import logStream, {getPipelineLog} from './getLog';
 import getStream, {getPipeline} from './get';
+import statusStream, {pipelineStatus} from './status';
 
 // create bus
 const pipelinesSubject = new ReplaySubject(1);
@@ -21,6 +22,7 @@ startStream.subscribe(pipelinesSubject);
 logStream.subscribe(pipelinesSubject);
 stopStream.subscribe(pipelinesSubject);
 getStream.subscribe(pipelinesSubject);
+statusStream.subscribe(pipelinesSubject);
 
 // create result store stream
 const pipelines = pipelinesSubject
@@ -29,5 +31,14 @@ const pipelines = pipelinesSubject
 // dispatch default state
 pipelinesSubject.onNext(defaultState);
 
-export {testPipeline, createPipeline, getPipelines, startPipeline, stopPipeline, getPipelineLog, getPipeline};
+export {
+    testPipeline,
+    createPipeline,
+    getPipelines,
+    startPipeline,
+    stopPipeline,
+    getPipelineLog,
+    getPipeline,
+    pipelineStatus
+};
 export default pipelines;

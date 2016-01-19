@@ -5,6 +5,7 @@ import {Modal} from '../../components/bootstrap';
 import Component from '../../components/component';
 import {RxState} from '../../stores/util';
 import pipelineStore, {getPipelines, startPipeline, stopPipeline, getPipelineLog} from '../../stores/pipeline';
+import {pipelineStatus} from '../../stores/pipeline';
 import authStore from '../../stores/auth';
 
 const PipelinesCatalogue = React.createClass({
@@ -24,6 +25,7 @@ const PipelinesCatalogue = React.createClass({
     },
 
     startPipeline(pipeline) {
+        pipelineStatus(pipeline);
         startPipeline(pipeline);
     },
     stopPipeline(pipeline) {
