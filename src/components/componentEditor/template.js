@@ -123,14 +123,15 @@ const render = function() {
                 {/* test buttons */}
                 {!isOwner || this.state.codeAnalysis.error ? '' : (
                 <div className="row row-margin-top">
-                    <button className="btn btn-warning" onClick={this.testCode}>
-                        Test
-                    </button>
                     {this.state.testResult && this.state.testResult.ws ? (
                         <button className="btn btn-danger btn-margin-left" onClick={this.stopTest}>
                             Stop test
                         </button>
-                    ) : ''}
+                    ) : (
+                        <button className="btn btn-warning" onClick={this.testCode}>
+                            Test
+                        </button>
+                    )}
                 </div>
                 )}
 
