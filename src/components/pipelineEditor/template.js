@@ -42,14 +42,15 @@ const render = function() {
                 {renderRendererComponent.call(this)}
                 <div className="row row-margin-top">
                     <div className="col-xs-12">
-                        <button className="btn btn-warning" onClick={this.testPipeline}>
-                            Test
-                        </button>
                         {this.state.testResult && this.state.testResult.get('ws') ? (
                         <button className="btn btn-danger" onClick={this.stopTest}>
                             Stop test
                         </button>
-                        ) : ''}
+                        ) : (
+                        <button className="btn btn-warning" onClick={this.testPipeline}>
+                            Test
+                        </button>
+                        )}
 
                         <button className="btn btn-primary pull-right" onClick={this.savePipeline}>
                             Save
