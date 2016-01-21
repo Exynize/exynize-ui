@@ -1,7 +1,7 @@
 import React from 'react';
 
 const render = function() {
-    const isOwner = this.state.user.id === this.state.authedUser.id;
+    const isOwner = this.state.user.id === 'new' || (this.state.user.id === this.state.authedUser.id);
     return (
         <div className="row">
             <div className="col-xs-6 col-xs-offset-2 component-header">
@@ -67,7 +67,7 @@ const render = function() {
             {/* main area */}
             <div className="col-xs-6 col-xs-offset-2">
                 {/* component code */}
-                {this.state.isSourcePublic ? (
+                {isOwner || this.state.isSourcePublic ? (
                 <textarea
                     ref="code"
                     className="form-control"
@@ -101,7 +101,7 @@ const render = function() {
 
                 {/* function parameters for testing */}
                 <div className="row">
-                    {this.state.codeAnalysis.testParams && this.state.codeAnalysis.testParams.length ? (
+                    {isOwner && this.state.codeAnalysis.testParams && this.state.codeAnalysis.testParams.length ? (
                         <div>
                             <h5>Test params:</h5>
                             {this.state.codeAnalysis.testParams.map((paramName, i) => (

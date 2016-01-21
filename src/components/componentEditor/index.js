@@ -56,15 +56,23 @@ const ComponentEditor = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
+        const isOwner = nextProps.user.id === 'new' || (nextProps.user.id === this.state.authedUser.id);
         this.setState({...nextProps, testResult: {}});
-        console.log(nextProps)
-        if (nextProps.isSourcePublic && this.editor) {
+        if ((isOwner || nextProps.isSourcePublic) && this.editor) {
             this.editor.setValue(nextProps.source);
         }
     },
 
+    componentDidMount() {
+        this.createEditor();
+    },
     componentDidUpdate() {
-        if (!this.editor && this.state.isSourcePublic) {
+        this.createEditor();
+    },
+
+    createEditor() {
+        const isOwner = this.state.user.id === 'new' || (this.state.user.id === this.state.authedUser.id);
+        if (!this.editor && (this.state.isSourcePublic || isOwner)) {
             this.editor = codemirror.fromTextArea(this.refs.code, {
                 lineNumbers: true,
                 autofocus: true,
@@ -72,6 +80,7 @@ const ComponentEditor = React.createClass({
                 mode: 'javascript',
                 extraKeys: {'Ctrl-Space': 'autocomplete'},
                 value: this.state.source,
+                readOnly: !isOwner,
             });
             this.editor.on('change', this.handleCodeChange);
             this.handleCodeChange();

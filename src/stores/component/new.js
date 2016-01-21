@@ -16,6 +16,9 @@ const stream = newComponent.$
             version: '1.0.0',
             isPublic: false,
             isSourcePublic: false,
+            user: {
+                id: 'new',
+            },
         },
     }));
 
