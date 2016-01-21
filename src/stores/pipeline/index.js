@@ -26,7 +26,7 @@ statusStream.subscribe(pipelinesSubject);
 
 // create result store stream
 const pipelines = pipelinesSubject
-    .scan((state, newData) => state.merge(newData), defaultState);
+    .scan((state, newData) => state.mergeDeep(newData), defaultState);
 
 // dispatch default state
 pipelinesSubject.onNext(defaultState);
