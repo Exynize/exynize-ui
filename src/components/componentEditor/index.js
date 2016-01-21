@@ -3,6 +3,7 @@ import uuid from 'node-uuid';
 import semver from 'semver';
 import {RxState} from '../../stores/util';
 import componentStore, {testComponent, createComponent} from '../../stores/component';
+import authStore from '../../stores/auth';
 import codemirror from './codemirror/codemirror';
 import analyseCode from './codemirror/codeanalysis';
 import render from './template';
@@ -15,6 +16,10 @@ const defaultFunction = `export default (data) => {
 const ComponentEditor = React.createClass({
     mixins: [RxState],
 
+    stores: {
+        authedUser: authStore.map(s => s.get('user').toJS()),
+    },
+
     getDefaultProps() {
         return {
             name: 'My new component',
@@ -23,6 +28,7 @@ const ComponentEditor = React.createClass({
             version: '1.0.0',
             isPublic: false,
             isSourcePublic: false,
+            user: {},
         };
     },
 
@@ -33,11 +39,10 @@ const ComponentEditor = React.createClass({
         component.testId = uuid.v4();
 
         // setup store with new testId
-        this.stores = {
-            testResult: componentStore.map(v => v.get('testResult').toJS())
-                .map(testResult => testResult[this.state.testId])
-                .filter(testResult => testResult !== undefined),
-        };
+        this.stores.testResult = componentStore
+            .map(v => v.get('testResult').toJS())
+            .map(testResult => testResult[this.state.testId])
+            .filter(testResult => testResult !== undefined);
 
         // return
         return {
@@ -46,16 +51,20 @@ const ComponentEditor = React.createClass({
             testResult: {},
             createResult: {},
             testExpanded: false,
+            authedUser: {},
         };
     },
 
     componentWillReceiveProps(nextProps) {
         this.setState({...nextProps, testResult: {}});
-        this.editor.setValue(nextProps.source);
+        console.log(nextProps)
+        if (nextProps.isSourcePublic && this.editor) {
+            this.editor.setValue(nextProps.source);
+        }
     },
 
-    componentDidMount() {
-        if (!this.editor) {
+    componentDidUpdate() {
+        if (!this.editor && this.state.isSourcePublic) {
             this.editor = codemirror.fromTextArea(this.refs.code, {
                 lineNumbers: true,
                 autofocus: true,

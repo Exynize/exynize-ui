@@ -1,36 +1,41 @@
 import React from 'react';
 
 const render = function() {
+    const isOwner = this.state.user.id === this.state.authedUser.id;
     return (
         <div className="row">
             <div className="col-xs-6 col-xs-offset-2 component-header">
                 <div className="input-group">
                     {/* component type */}
                     <span className="input-group-addon">
+                        {isOwner ? (
                         <span className="label label-info">
                             {this.state.codeAnalysis.componentType ?
                                 this.state.codeAnalysis.componentType :
                                 'unknown'}
                         </span>
+                        ) : (
+                        <span className="label label-primary">
+                            {this.state.type}
+                        </span>
+                        )}
                     </span>
                     {/* component name */}
                     <input className="form-control" type="text" id="componentName"
                         value={this.state.name} onChange={this.handleName}
-                        placeholder="Component name"/>
+                        placeholder="Component name"
+                        disabled={!isOwner} />
 
                     {/* main action buttons (save / clear) */}
+                    {isOwner ? (
                     <div className="input-group-btn">
                         <button className="btn btn-default"
                             onClick={this.createComponent}
                             title={this.state.id ? 'Update' : 'Save'}>
                             <i className="glyphicon glyphicon-save"></i> Save
                         </button>
-                        {/*<button className="btn btn-default"
-                            onClick={this.resetEditor}
-                            title="Reset editor">
-                            <i className="glyphicon glyphicon-remove"></i>
-                        </button>*/}
                     </div>
+                    ) : ''}
                 </div>
             </div>
 
@@ -38,18 +43,21 @@ const render = function() {
                 {/* component version */}
                 <input className="form-control version-input" type="text" id="componentVersion"
                     value={this.state.version} onChange={this.handleVersion}
-                    placeholder="Component version"/>
+                    placeholder="Component version"
+                    disabled={!isOwner} />
                 <label className="component-toggle">
                     <input
                         type="checkbox"
                         checked={this.state.isPublic}
-                        onChange={this.handlePublicChange} /> Public
+                        onChange={this.handlePublicChange}
+                        disabled={!isOwner} /> Public
                 </label>
                 <label>
                     <input
                         type="checkbox"
                         checked={this.state.isSourcePublic}
-                        onChange={this.handleSourcePublicChange} /> Source public
+                        onChange={this.handleSourcePublicChange}
+                        disabled={!isOwner} /> Source public
                 </label>
                 {this.state.versionError ? (
                     <p className="text-danger input-error-text">{this.state.versionError}</p>
@@ -59,10 +67,14 @@ const render = function() {
             {/* main area */}
             <div className="col-xs-6 col-xs-offset-2">
                 {/* component code */}
+                {this.state.isSourcePublic ? (
                 <textarea
                     ref="code"
                     className="form-control"
                     defaultValue={this.state.source} />
+                ) : (
+                <div className="text-center">This component's source is private</div>
+                )}
 
                 {/* linter/code errors */}
                 <div className="row">
@@ -83,7 +95,8 @@ const render = function() {
                         className="form-control"
                         placeholder="Enter component description..."
                         value={this.state.description}
-                        onChange={this.handleDescription} />
+                        onChange={this.handleDescription}
+                        disabled={!isOwner} />
                 </div>
 
                 {/* function parameters for testing */}
@@ -108,7 +121,7 @@ const render = function() {
                 </div>
 
                 {/* test buttons */}
-                {this.state.codeAnalysis.error ? '' : (
+                {!isOwner || this.state.codeAnalysis.error ? '' : (
                 <div className="row row-margin-top">
                     <button className="btn btn-warning" onClick={this.testCode}>
                         Test
@@ -122,6 +135,7 @@ const render = function() {
                 )}
 
                 {/* test result expand/collapse control */}
+                {isOwner ? (
                 <div className="row row-margin-top">
                     <button
                         className="btn btn-xs btn-default btn-noshadow btn-normal-case"
@@ -130,9 +144,10 @@ const render = function() {
                         &nbsp;{this.state.testExpanded ? 'Hide' : 'Show'} test results
                     </button>
                 </div>
+                ) : ''}
 
                 {/* test results */}
-                {this.state.testExpanded ? (
+                {isOwner && this.state.testExpanded ? (
                 <div className="row row-margin-top">
                     {/* test error alert */}
                     {this.state.testResult.error ? (

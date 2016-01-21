@@ -143,6 +143,11 @@ const PipelineEditor = React.createClass({
         createPipeline(pipeline);
     },
 
+    isOwner() {
+        return this.state.user && this.state.authedUser &&
+            this.state.user.id === this.state.authedUser.id;
+    },
+
     render,
 });
 
