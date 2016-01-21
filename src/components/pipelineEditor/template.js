@@ -13,11 +13,32 @@ const render = function() {
                     placeholder="Pipeline name"
                     value={this.state.name}
                     onChange={this.handleNameChange} />
-                <h5 className="padded-top-header">Source component:</h5>
+                <h5 className="padded-top-header">
+                    Source component:&nbsp;
+                    {!this.state.source ? (
+                    <button className="btn btn-default btn-xs" onClick={this.handleSelectSourceComponent}>
+                        <i className={'glyphicon glyphicon-' + (this.state.sourceComponentSelect ? 'minus' : 'plus')} />
+                    </button>
+                    ) : ''}
+                </h5>
                 {renderSource.call(this)}
-                <h5 className="padded-top-header">Processor components:</h5>
+                <h5 className="padded-top-header">
+                    Processor components:&nbsp;
+                    <button className="btn btn-default btn-xs" onClick={this.handleSelectProcessorComponents}>
+                        <i className={'glyphicon glyphicon-' +
+                            (this.state.processorComponentsSelect ? 'minus' : 'plus')} />
+                    </button>
+                </h5>
                 {renderProcessors.call(this)}
-                <h5 className="padded-top-header">Render component:</h5>
+                <h5 className="padded-top-header">
+                    Render component:&nbsp;
+                    {!this.state.render ? (
+                    <button className="btn btn-default btn-xs" onClick={this.handleSelectRendererComponent}>
+                        <i className={'glyphicon glyphicon-' +
+                            (this.state.rendererComponentSelect ? 'minus' : 'plus')} />
+                    </button>
+                    ) : ''}
+                </h5>
                 {renderRendererComponent.call(this)}
                 <div className="row row-margin-top">
                     <div className="col-xs-12">

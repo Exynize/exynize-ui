@@ -56,13 +56,13 @@ const PipelineEditor = React.createClass({
     },
 
     handleSelectSourceComponent() {
-        this.setState({sourceComponentSelect: true});
+        this.setState({sourceComponentSelect: !this.state.sourceComponentSelect});
     },
     handleSelectProcessorComponents() {
-        this.setState({processorComponentsSelect: true});
+        this.setState({processorComponentsSelect: !this.state.processorComponentsSelect});
     },
     handleSelectRendererComponent() {
-        this.setState({rendererComponentSelect: true});
+        this.setState({rendererComponentSelect: !this.state.rendererComponentSelect});
     },
     handleSourceToggle(comp) {
         comp.showSource = !comp.showSource;

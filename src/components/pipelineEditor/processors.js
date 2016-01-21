@@ -14,17 +14,14 @@ const processorsSelector = function() {
         return processorComponentsSelector.call(this);
     }
 
-    return (
-        <button className="btn btn-default" onClick={this.handleSelectProcessorComponents}>
-            Select processor components
-        </button>
-    );
+    return '';
 };
 
 const renderProcessors = function() {
     return (
         <div className="row">
             <div className="col-xs-12">
+                {processorsSelector.call(this)}
                 <div className="well row no-bottom-padding">
                     <div className="col-xs-12">
                     {this.state.components.length > 0 ?
@@ -35,11 +32,11 @@ const renderProcessors = function() {
                                 this.handleProcessorComponentDeselect,
                                 'Deselect'
                             )
-                        ) :
-                    'No processors added yet'}
+                    ) : (
+                        <p>No processors added yet</p>
+                    )}
                     </div>
                 </div>
-            {processorsSelector.call(this)}
             </div>
         </div>
     );
