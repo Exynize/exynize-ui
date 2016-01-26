@@ -1,4 +1,5 @@
 import React from 'react';
+import JSONTree from 'react-json-tree';
 
 const render = function() {
     const isOwner = this.state.user.id === 'new' || (this.state.user.id === this.state.authedUser.id);
@@ -169,7 +170,9 @@ const render = function() {
                                 <div dangerouslySetInnerHTML={{__html: this.state.testResult.resp[1]}} />
                             </div>
                         ) : (
-                            <pre className="testResults">{JSON.stringify(this.state.testResult.resp, null, 4)}</pre>
+                            <div className="testResults">
+                                <JSONTree data={this.state.testResult.resp} />
+                            </div>
                         )}
                     </div>
                     ) : (
