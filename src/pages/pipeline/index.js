@@ -23,7 +23,7 @@ const Pipeline = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        this.updateComponent(nextProps);
+        this.updatePipeline(nextProps);
     },
 
     updatePipeline(props) {
@@ -32,7 +32,7 @@ const Pipeline = React.createClass({
             return;
         }
         // if user and component name present - get component from server
-        if (props.params.user && props.params.component) {
+        if (props.params.user && props.params.pipeline) {
             this.getPipeline(props.params);
         }
     },
