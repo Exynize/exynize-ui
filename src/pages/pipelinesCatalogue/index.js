@@ -72,7 +72,9 @@ const PipelinesCatalogue = React.createClass({
                         </span>
                         <a
                             className="btn btn-default btn-xs btn-margin-left"
-                            href={`http://${apiUri}/api/pipes/${p.id}?token=${localStorage.getItem('auth.token')}`}>
+                            href={`http://${apiUri}/api/pipes/` +
+                                `${p.user.username}/${p.refName}` +
+                                `/result?token=${localStorage.getItem('auth.token')}`}>
                             <i className="glyphicon glyphicon-globe"></i> Web
                         </a>
                         <button
