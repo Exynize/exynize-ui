@@ -125,8 +125,12 @@ const PipelinesCatalogue = React.createClass({
                                 <div className="panel-body">
                                 {group.reduction.map(item => (
                                     <div key={'logitem_' + item.id}>
-                                        {moment(item.added_on).format('llll')}:
-                                        <JSONTree data={item.data} />
+                                        {moment(item.added_on).format('MMMM Do YYYY, HH:mm:ss')}
+                                        <JSONTree data={
+                                            typeof item.data !== 'object' ?
+                                                {string: item.data} :
+                                                item.data
+                                        } />
                                     </div>
                                 ))}
                                 </div>

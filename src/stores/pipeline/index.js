@@ -1,5 +1,7 @@
+import {List} from 'immutable';
 import {ReplaySubject} from 'rx';
 import defaultState from './defaultState';
+import mergePipeline from './mergePipelines';
 
 // actions
 import testStream, {testPipeline} from './test';
@@ -26,7 +28,7 @@ statusStream.subscribe(pipelinesSubject);
 
 // create result store stream
 const pipelines = pipelinesSubject
-    .scan((state, newData) => state.mergeDeep(newData), defaultState);
+    .scan((state, newData) => state.mergeWith(mergePipeline, newData), defaultState);
 
 // dispatch default state
 pipelinesSubject.onNext(defaultState);
