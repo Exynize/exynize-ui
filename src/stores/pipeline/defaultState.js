@@ -4,7 +4,7 @@ import {fromJS} from 'immutable';
 const pipeState = fromJS({
     testResult: undefined,
     pipelines: [],
-    pipelineLog: undefined,
+    pipelineLog: [],
     pipeline: {},
 });
 

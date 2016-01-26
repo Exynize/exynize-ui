@@ -139,3 +139,7 @@ body {
 .user-item > .list-group-item {
     min-height: 265px;
 }
+
+.modal-backdrop {
+    opacity: 0.3;
+}

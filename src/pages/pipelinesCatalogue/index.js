@@ -1,5 +1,7 @@
 import React from 'react';
+import JSONTree from 'react-json-tree';
 import {Link} from 'react-router';
+import moment from 'moment';
 import {apiUri} from '../../stores/config';
 import {Modal} from '../../components/bootstrap';
 import Component from '../../components/component';
@@ -12,7 +14,7 @@ const PipelinesCatalogue = React.createClass({
     mixins: [RxState],
     stores: {
         pipelines: pipelineStore.map(s => s.get('pipelines').toJS()),
-        pipelineLog: pipelineStore.map(s => s.get('pipelineLog')),
+        pipelineLog: pipelineStore.map(s => s.get('pipelineLog').toJS()),
         user: authStore.map(s => s.get('user').toJS()),
     },
 
@@ -34,9 +36,10 @@ const PipelinesCatalogue = React.createClass({
 
     showLog(pipeline) {
         getPipelineLog(pipeline);
+        this.setState({showLog: true});
     },
     closePipelineLog() {
-        this.setState({pipelineLog: null});
+        this.setState({pipelineLog: null, showLog: false});
     },
     showComponents(pipeline) {
         pipeline.showComponents = !pipeline.showComponents;
@@ -112,19 +115,18 @@ const PipelinesCatalogue = React.createClass({
                     </div>
                     ))}
 
-                    {this.state.pipelineLog ? (
+                    {this.state.showLog && this.state.pipelineLog ? (
                     <Modal title="Pipeline log" onClose={this.closePipelineLog}>
-                        {this.state.pipelineLog.map(g => g.toJS()).map(group => (
+                        {this.state.pipelineLog.map(group => (
                             <div className="panel panel-default" key={'loggroup_' + group.group}>
                                 <div className="panel-heading">
                                     Session Id: {group.group}
                                 </div>
                                 <div className="panel-body">
                                 {group.reduction.map(item => (
-                                    <div className="row" key={'logitem_' + item.id}>
-                                        Data:
-                                        <pre>{JSON.stringify(item.data, null, 4)}</pre>
-                                        Added on: {item.added_on}
+                                    <div key={'logitem_' + item.id}>
+                                        {moment(item.added_on).format('llll')}:
+                                        <JSONTree data={item.data} />
                                     </div>
                                 ))}
                                 </div>
