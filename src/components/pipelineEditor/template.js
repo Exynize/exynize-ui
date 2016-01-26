@@ -1,7 +1,9 @@
 import React from 'react';
+import JSONTree from 'react-json-tree';
 import renderSource from './source';
 import renderProcessors from './processors';
 import renderRendererComponent from './renderComponent';
+
 
 const render = function() {
     return (
@@ -59,7 +61,7 @@ const render = function() {
                         {this.state.testResult && this.state.testResult.get('resp') ? (
                         <div className="row" key="testRes">
                             <p>Test result:</p>
-                            <pre>{JSON.stringify(this.state.testResult.get('resp'), null, 4)}</pre>
+                            <JSONTree data={this.state.testResult.get('resp')} />
                         </div>
                         ) : ''}
                     </div>
