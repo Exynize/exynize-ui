@@ -1,6 +1,6 @@
 export default (prev, next, key) => {
     // if it's pipeline status update
-    if (key === 'pipelines' && next.size === 1) {
+    if (key === 'pipelines' && prev.size !== 0 && next.size === 1) {
         // get new pipeline data
         const newPipeline = next.first();
         // find old with index
