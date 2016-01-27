@@ -107,7 +107,9 @@ const PipelineEditor = React.createClass({
         const pipeline = {
             source: {
                 source: this.state.source.source,
-                args: this.state.source.params.map(name => this.state.source.paramValues[name]),
+                args: this.state.source.params.map(name =>
+                    this.state.source.paramValues ? this.state.source.paramValues[name] : undefined
+                ),
             },
             components,
         };
