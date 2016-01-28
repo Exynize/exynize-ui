@@ -9,12 +9,24 @@ const render = function() {
     return (
         <div className="row">
             <div className="col-xs-8 col-xs-offset-2">
-                <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Pipeline name"
-                    value={this.state.name}
-                    onChange={this.handleNameChange} />
+                <div className="row">
+                    <div className="col-xs-9">
+                        <input
+                            className="form-control"
+                            type="text"
+                            placeholder="Pipeline name"
+                            value={this.state.name}
+                            onChange={this.handleNameChange} />
+                    </div>
+                    <div className="col-xs-3">
+                        <label className="component-toggle">
+                            <input
+                                type="checkbox"
+                                checked={this.state.isPublic}
+                                onChange={this.handlePublicChange} /> Public
+                        </label>
+                    </div>
+                </div>
                 <h5 className="padded-top-header">
                     Source component:&nbsp;
                     {!this.state.source ? (

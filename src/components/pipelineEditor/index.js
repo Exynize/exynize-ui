@@ -6,6 +6,13 @@ import pipelineStore, {testPipeline, createPipeline} from '../../stores/pipeline
 import authStore from '../../stores/auth';
 import render from './template';
 
+// process params
+const adjustParams = (c) => {
+    c.paramValues = {};
+    c.params.forEach((paramName, i) => c.paramValues[paramName] = c.args[i]);
+    return c;
+};
+
 const PipelineEditor = React.createClass({
     mixins: [RxState],
     stores: {
@@ -29,12 +36,7 @@ const PipelineEditor = React.createClass({
         const pipeline = {...this.props};
         // request components
         getComponents();
-        // process params
-        const adjustParams = (c) => {
-            c.paramValues = {};
-            c.params.forEach((paramName, i) => c.paramValues[paramName] = c.args[i]);
-            return c;
-        };
+        // adjust params
         if (pipeline.source) {
             pipeline.source = adjustParams(pipeline.source);
         }
@@ -52,7 +54,15 @@ const PipelineEditor = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        this.setState({...nextProps});
+        const pipeline = {...nextProps};
+        // adjust params
+        if (pipeline.source) {
+            pipeline.source = adjustParams(pipeline.source);
+        }
+        if (pipeline.render) {
+            pipeline.render = adjustParams(pipeline.render);
+        }
+        this.setState({...pipeline});
     },
 
     handleSelectSourceComponent() {
@@ -67,6 +77,9 @@ const PipelineEditor = React.createClass({
     handleSourceToggle(comp) {
         comp.showSource = !comp.showSource;
         this.forceUpdate();
+    },
+    handlePublicChange(e) {
+        this.setState({isPublic: e.target.checked});
     },
 
     handleSourceComponent(source) {
@@ -137,7 +150,7 @@ const PipelineEditor = React.createClass({
                 id: this.state.render ? this.state.render.id : '-1',
             },
             name: this.state.name,
-            isPublic: true,
+            isPublic: this.state.isPublic,
         };
         if (this.state.id) {
             pipeline.id = this.state.id;
