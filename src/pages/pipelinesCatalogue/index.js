@@ -70,6 +70,9 @@ const PipelinesCatalogue = React.createClass({
                             }>
                             Status: {p.status}
                         </span>
+                        <span className="label label-info btn-margin-left">
+                            {p.isPublic ? 'public' : 'private'}
+                        </span>
                         <a
                             className="btn btn-default btn-xs btn-margin-left"
                             href={`http://${apiUri}/api/pipes/` +
