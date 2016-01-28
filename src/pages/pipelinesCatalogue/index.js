@@ -53,7 +53,7 @@ const PipelinesCatalogue = React.createClass({
                     <div className="page-header page-header-slim">
                         <h4>Pipelines catalogue</h4>
                     </div>
-                    {this.state.pipelines.map(p => (
+                    {this.state.pipelines.length ? this.state.pipelines.map(p => (
                     <div className="row pipeline" key={'pipeline_' + p.id}>
                         <Link to={`/user/${p.user.username}`}
                             className={'user ' + (p.user.id === this.state.user.id ? 'user-self' : '')}>
@@ -115,7 +115,13 @@ const PipelinesCatalogue = React.createClass({
                         </button>
                         ) : ''}
                     </div>
-                    ))}
+                    )) : (
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <h5>No pipelines found.</h5>
+                        </div>
+                    </div>
+                    )}
 
                     {this.state.showLog && this.state.pipelineLog ? (
                     <Modal title="Pipeline log" onClose={this.closePipelineLog}>
