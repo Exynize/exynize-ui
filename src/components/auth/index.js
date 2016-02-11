@@ -1,13 +1,13 @@
 import {currentState} from '../../stores/auth';
 
-export const requireAuth = (nextState, replaceState) => {
+export const requireAuth = (nextState, replace) => {
     if (!currentState.get('authed')) {
-        replaceState({nextPathname: nextState.location.pathname}, '/login');
+        replace('/login');
     }
 };
 
-export const requireAdminAuth = (nextState, replaceState) => {
+export const requireAdminAuth = (nextState, replace) => {
     if (!currentState.get('authed') || !currentState.getIn(['user', 'isAdmin'])) {
-        replaceState({nextPathname: nextState.location.pathname}, '/');
+        replace('/');
     }
 };

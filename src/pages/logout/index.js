@@ -1,14 +1,12 @@
 import React from 'react';
-import {History} from 'react-router';
+import {browserHistory} from 'react-router';
 import {logout} from '../../stores/auth';
 
 const Logout = React.createClass({
-    mixins: [History],
-
     componentDidMount() {
         logout();
         // navigate to logout
-        this.history.pushState(null, '/login');
+        browserHistory.push('/login');
     },
 
     render() {

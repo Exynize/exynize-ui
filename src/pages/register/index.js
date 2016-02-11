@@ -1,10 +1,8 @@
 import React from 'react';
-import {History} from 'react-router';
+import {browserHistory} from 'react-router';
 import auth, {register} from '../../stores/auth';
 
 const Register = React.createClass({
-    mixins: [History],
-
     getInitialState() {
         return {
             error: undefined,
@@ -14,7 +12,7 @@ const Register = React.createClass({
     componentDidMount() {
         this.sub = auth.subscribe(s => {
             if (s.get('authed')) {
-                this.history.pushState(null, '/');
+                browserHistory.push('/');
             }
         });
     },

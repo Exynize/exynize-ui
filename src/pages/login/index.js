@@ -1,15 +1,13 @@
 import React from 'react';
-import {History} from 'react-router';
+import {browserHistory} from 'react-router';
 import auth, {login, resetPassword} from '../../stores/auth';
 
 const Login = React.createClass({
-    mixins: [History],
-
     componentDidMount() {
         this.sub = auth
             .map(s => s.get('authed'))
             .filter(authed => authed === true)
-            .subscribe(() => this.history.pushState(null, '/'));
+            .subscribe(() => browserHistory.push('/'));
     },
     componentWillUnmount() {
         this.sub.dispose();
