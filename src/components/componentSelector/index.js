@@ -23,7 +23,7 @@ const ComponentSelector = React.createClass({
         };
     },
     componentWillReceiveProps(nextProps) {
-        this.setState({...nextProps});
+        this.setState({...nextProps, currentPage: 0});
     },
 
     handleSourceToggle(comp) {
