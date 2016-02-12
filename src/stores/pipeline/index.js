@@ -1,4 +1,3 @@
-import {List} from 'immutable';
 import {ReplaySubject} from 'rx';
 import defaultState from './defaultState';
 import mergePipeline from './mergePipelines';
@@ -12,6 +11,7 @@ import stopStream, {stopPipeline} from './stop';
 import logStream, {getPipelineLog} from './getLog';
 import getStream, {getPipeline} from './get';
 import statusStream, {pipelineStatus} from './status';
+import deleteStream, {deletePipeline} from './delete';
 
 // create bus
 const pipelinesSubject = new ReplaySubject(1);
@@ -25,6 +25,7 @@ logStream.subscribe(pipelinesSubject);
 stopStream.subscribe(pipelinesSubject);
 getStream.subscribe(pipelinesSubject);
 statusStream.subscribe(pipelinesSubject);
+deleteStream.subscribe(pipelinesSubject);
 
 // create result store stream
 const pipelines = pipelinesSubject
@@ -41,6 +42,7 @@ export {
     stopPipeline,
     getPipelineLog,
     getPipeline,
-    pipelineStatus
+    pipelineStatus,
+    deletePipeline,
 };
 export default pipelines;

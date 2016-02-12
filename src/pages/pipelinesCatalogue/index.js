@@ -6,7 +6,13 @@ import {apiUri} from '../../stores/config';
 import {Modal} from '../../components/bootstrap';
 import Component from '../../components/component';
 import {RxState} from '../../stores/util';
-import pipelineStore, {getPipelines, startPipeline, stopPipeline, getPipelineLog} from '../../stores/pipeline';
+import pipelineStore, {
+    getPipelines,
+    startPipeline,
+    stopPipeline,
+    getPipelineLog,
+    deletePipeline
+} from '../../stores/pipeline';
 import {pipelineStatus} from '../../stores/pipeline';
 import authStore from '../../stores/auth';
 
@@ -44,6 +50,10 @@ const PipelinesCatalogue = React.createClass({
     showComponents(pipeline) {
         pipeline.showComponents = !pipeline.showComponents;
         this.forceUpdate();
+    },
+    deletePipeline(p) {
+        const toDel = {user: p.user.username, pipeline: p.refName};
+        deletePipeline(toDel);
     },
 
     render() {
@@ -85,6 +95,12 @@ const PipelinesCatalogue = React.createClass({
                             onClick={this.showLog.bind(this, p)}>
                             <i className="glyphicon glyphicon-file"></i> Log
                         </button>
+                        {p.user.id === this.state.user.id ? (
+                        <button className="btn btn-danger btn-xs pull-right"
+                            onClick={this.deletePipeline.bind(this, p)}>
+                            Delete
+                        </button>
+                        ) : ''}
                         <p>
                             <button
                                 className="btn btn-default btn-xs"
