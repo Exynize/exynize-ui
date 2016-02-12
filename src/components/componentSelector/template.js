@@ -25,7 +25,8 @@ const render = function() {
                         actionButtons={this.state.actionButtons(c)}
                         key={c.id}
                         authUser={this.state.user}
-                        toggleSource={this.handleSourceToggle.bind(this, c)} />
+                        toggleSource={this.handleSourceToggle.bind(this, c)}
+                        onDelete={this.handleDeleteComponent.bind(this, c)} />
                 ))}
                 <div className="text-center">
                     <ul className="pagination">

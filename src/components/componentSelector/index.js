@@ -1,5 +1,6 @@
 import React from 'react';
 import {RxState} from '../../stores/util';
+import {deleteComponent} from '../../stores/component';
 import render from './template';
 
 const ComponentSelector = React.createClass({
@@ -28,6 +29,10 @@ const ComponentSelector = React.createClass({
     handleSourceToggle(comp) {
         comp.showSource = !comp.showSource;
         this.forceUpdate();
+    },
+    handleDeleteComponent(comp) {
+        const toDel = {user: comp.user.username, component: comp.refName};
+        deleteComponent(toDel);
     },
 
     displayedComponents() {

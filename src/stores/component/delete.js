@@ -6,30 +6,30 @@ import {apiBase} from '../config';
 import {signRequest} from '../auth';
 import {createNotification} from '../notifications';
 
-const createComponent = createAction();
+const deleteComponent = createAction();
 
-const stream = createComponent.$
+const stream = deleteComponent.$
     .map(signRequest)
     .flatMap(data =>
         request
-        .post(apiBase + '/api/components')
-        .send(data)
+        .del(apiBase + `/api/component/${data.user}/${data.component}`)
+        .send({token: data.token})
         .observe()
         .map(res => {
-            if (res.statusCode === 201) {
-                createNotification({message: 'Success! Component was created!', type: 'success'});
+            if (res.statusCode === 204) {
+                createNotification({message: 'Success! Component was deleted!', type: 'success'});
                 return true;
             }
 
             createNotification({
-                message: `Error creating component, server returned ${res.statusCode}!`,
+                message: `Error deleting component, server returned ${res.statusCode}!`,
                 type: 'danger',
             });
             return false;
         })
         .catch(err => {
             createNotification({
-                message: `Error creating component, server returned ${err.response.code}!
+                message: `Error deleting component, server returned ${err.response.code}!
                 Server response: ${err.response.body.error}`,
                 type: 'danger',
             });
@@ -42,5 +42,5 @@ const stream = createComponent.$
         testResult: {},
     }));
 
-export {createComponent};
+export {deleteComponent};
 export default stream;

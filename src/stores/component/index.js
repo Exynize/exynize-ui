@@ -7,6 +7,7 @@ import createStream, {createComponent} from './create';
 import getComponentStream, {getComponent} from './get';
 import getComponentsStream, {getComponents} from './getAll';
 import newComponentStream, {newComponent} from './new';
+import deleteComponentStream, {deleteComponent} from './delete';
 
 // create bus
 const componentsSubject = new ReplaySubject(1);
@@ -17,6 +18,7 @@ createStream.subscribe(componentsSubject);
 getComponentStream.subscribe(componentsSubject);
 getComponentsStream.subscribe(componentsSubject);
 newComponentStream.subscribe(componentsSubject);
+deleteComponentStream.subscribe(componentsSubject);
 
 // create result store stream
 const components = componentsSubject
@@ -25,5 +27,5 @@ const components = componentsSubject
 // dispatch default state
 componentsSubject.onNext(defaultState);
 
-export {testComponent, createComponent, getComponents, getComponent, newComponent};
+export {testComponent, createComponent, getComponents, getComponent, newComponent, deleteComponent};
 export default components;

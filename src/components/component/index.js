@@ -17,6 +17,12 @@ const Component = (props) => (
                     className="component">
                     {props.name}
                 </Link>
+
+                {props.onDelete && props.user.id === props.authUser.id ? (
+                <button className="btn btn-danger btn-xs pull-right" onClick={props.onDelete}>
+                    Delete
+                </button>
+                ) : ''}
             </h3>
         </div>
         <div className="panel-body no-bottom-padding">
