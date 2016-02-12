@@ -1,5 +1,13 @@
 # Changelog
 
+0.5.0 / 2016-02-12
+==================
+
+  * add delete pipeline functionality
+  * add delete component functionality
+  * upgrade to react-router 2.0 and http-proxy 0.10
+  * fix pagination bug on component count change in component selector
+
 0.4.0 / 2016-01-28
 ==================
 
