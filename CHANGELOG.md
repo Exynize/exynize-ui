@@ -1,5 +1,10 @@
 # Changelog
 
+0.6.0 / 2016-02-18
+==================
+
+  * add basic documentation and tutorials
+
 0.5.0 / 2016-02-12
 ==================
 
