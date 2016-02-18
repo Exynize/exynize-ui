@@ -4,16 +4,16 @@ import auth from '../../stores/auth';
 
 const wikiUris = {
     pipelines: 'https://github.com/Exynize/exynize-platform/wiki/Pipelines',
-    components: 'https://github.com/Exynize/exynize-platform/wiki/Components-general-concepts',
-    sources: 'https://github.com/Exynize/exynize-platform/wiki/Source-components',
-    processors: 'https://github.com/Exynize/exynize-platform/wiki/Processor-components',
-    renders: 'https://github.com/Exynize/exynize-platform/wiki/Render-components',
+    components: 'https://github.com/Exynize/exynize-platform/wiki/Components:-General-concepts',
+    sources: 'https://github.com/Exynize/exynize-platform/wiki/Components:-Source',
+    processors: 'https://github.com/Exynize/exynize-platform/wiki/Components:-Processor',
+    renders: 'https://github.com/Exynize/exynize-platform/wiki/Components:-Render',
     architecture: 'https://github.com/Exynize/exynize-platform/wiki/Architecture-overview',
-    helloworld: 'https://github.com/Exynize/exynize-platform/wiki/Hello-world-tutorial',
-    twitter: 'https://github.com/Exynize/exynize-platform/wiki/Twitter-product-comparison-tutorial',
-    bbc: 'https://github.com/Exynize/exynize-platform/wiki/BBC-world-news-map-tutorial',
-    slackbot: 'https://github.com/Exynize/exynize-platform/wiki/Slack-bot-tutorial',
-    slackslash: 'https://github.com/Exynize/exynize-platform/wiki/Slack-slash-command-tutorial',
+    helloworld: 'https://github.com/Exynize/exynize-platform/wiki/Tutorial:-Hello-world',
+    twitter: 'https://github.com/Exynize/exynize-platform/wiki/Tutorial:-Twitter-product-comparison',
+    bbc: 'https://github.com/Exynize/exynize-platform/wiki/Tutorial:-BBC-world-news-map',
+    slackbot: 'https://github.com/Exynize/exynize-platform/wiki/Tutorial:-Slack-slash-command',
+    slackslash: 'https://github.com/Exynize/exynize-platform/wiki/Tutorial:-Slack-bot',
 };
 
 const Home = React.createClass({
