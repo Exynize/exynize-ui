@@ -2,6 +2,20 @@ import React from 'react';
 import {RxState} from '../../stores/util';
 import auth from '../../stores/auth';
 
+const wikiUris = {
+    pipelines: 'https://github.com/Exynize/exynize-platform/wiki/Pipelines',
+    components: 'https://github.com/Exynize/exynize-platform/wiki/Components-general-concepts',
+    sources: 'https://github.com/Exynize/exynize-platform/wiki/Source-components',
+    processors: 'https://github.com/Exynize/exynize-platform/wiki/Processor-components',
+    renders: 'https://github.com/Exynize/exynize-platform/wiki/Render-components',
+    architecture: 'https://github.com/Exynize/exynize-platform/wiki/Architecture-overview',
+    helloworld: 'https://github.com/Exynize/exynize-platform/wiki/Hello-world-tutorial',
+    twitter: 'https://github.com/Exynize/exynize-platform/wiki/Twitter-product-comparison-tutorial',
+    bbc: 'https://github.com/Exynize/exynize-platform/wiki/BBC-world-news-map-tutorial',
+    slackbot: 'https://github.com/Exynize/exynize-platform/wiki/Slack-bot-tutorial',
+    slackslash: 'https://github.com/Exynize/exynize-platform/wiki/Slack-slash-command-tutorial',
+};
+
 const Home = React.createClass({
     mixins: [RxState],
     stores: {
@@ -17,7 +31,7 @@ const Home = React.createClass({
                         <strong className="text-danger">Alpha</strong>
                         <p>
                             This is an Alpha release of Exynize platform.
-                            Features might be changed in backward-incompatible ways
+                            Features might be changed in backward-incompatible ways, things might break
                             and it is not recommended for production use.
                         </p>
                     </blockquote>
@@ -27,30 +41,42 @@ const Home = React.createClass({
                         that respond to cloud events without the need to manage a server or a runtime environment.
                     </p>
                     <p className="description-text">
+                        <a href={wikiUris.helloworld}>Start by trying "Hello world" tutorial.</a>
+                    </p>
+                    <p className="description-text">
                         Exynize is written in Javascript and execute in a managed Node.js environment.
-                        Exynize provides three different function types (also refered to as "components"):
+                        Exynize provides three different types of functions (also refered to as "components"):
                     </p>
                     <ul className="description-text">
                         <li>
-                            <strong>Source</strong> - generate events and/or data that should be processed.
+                            <strong>
+                                <a href={wikiUris.sources}>Source components</a>
+                            </strong> - generate events and/or data that should be processed.
                         </li>
                         <li>
-                            <strong>Processor</strong> - processes the incoming data, can be either plugged into
+                            <strong>
+                                <a href={wikiUris.processors}>Processor components</a>
+                            </strong> - processes the incoming data, can be either plugged into
                                 source or chained after another processor.
                         </li>
                         <li>
-                            <strong>Render</strong> - renders the final result as HTML.
+                            <strong>
+                                <a href={wikiUris.renders}>Render components</a>
+                            </strong> - renders the final result as HTML.
                         </li>
                     </ul>
                     <p className="description-text">
                         All components are executed as stand-alone microservices and can do processing in real-time
                         as more events/data comes in.
+                        You can find out more on how components work in a <a href={wikiUris.components}>Components</a>
+                        &nbsp;wiki page.
                         Those components can be combined into more complex processing functions called "pipelines".
                         Pipeline always includes one source, at least one processor and one renderer.
+                        You can find out more on how pipelines work in a <a href={wikiUris.pipelines}>Pipelines</a>
+                        &nbsp;wiki page.
                     </p>
                     <p className="description-text">
-                        {/* TODO: insert correct link */}
-                        <a href="#">Read more about Exynize architecutre.</a>
+                        <a href={wikiUris.architecture}>Read more about Exynize architecture.</a>
                     </p>
                     <h3>Sources</h3>
                     <p className="description-text">
@@ -60,8 +86,7 @@ const Home = React.createClass({
                         that are already running.
                     </p>
                     <p className="description-text">
-                        {/* TODO: insert correct link */}
-                        <a href="#">Read more about sources.</a>
+                        <a href={wikiUris.sources}>Read more about sources.</a>
                     </p>
                     <h3>Processors</h3>
                     <p className="description-text">
@@ -71,8 +96,7 @@ const Home = React.createClass({
                         (e.g. send emails, send slack message, etc).
                     </p>
                     <p className="description-text">
-                        {/* TODO: insert correct link */}
-                        <a href="#">Read more about processors.</a>
+                        <a href={wikiUris.processors}>Read more about processors.</a>
                     </p>
                     <h3>Renders</h3>
                     <p className="description-text">
@@ -81,20 +105,18 @@ const Home = React.createClass({
                         The data will be delivered to renders in real-time as it comes through the pipeline.
                     </p>
                     <p className="description-text">
-                        {/* TODO: insert correct link */}
-                        <a href="#">Read more about renderers.</a>
+                        <a href={wikiUris.renders}>Read more about renderers.</a>
                     </p>
                     <h3>Additional info</h3>
                     <p className="description-text">
                         You can additionally read the following tutorials:
                     </p>
                     <ul className="description-text">
-                        {/* TODO: insert correct links */}
-                        <li><a href="#">Basic Exynize tutorial</a></li>
-                        <li><a href="#">Twitter product comparison tutorial</a></li>
-                        <li><a href="#">BBC world news sentiments map tutorial</a></li>
-                        <li><a href="#">Slack search bot tutorial</a></li>
-                        <li><a href="#">Slack slash command tutorial</a></li>
+                        <li><a href={wikiUris.helloworld}>Hello world tutorial</a></li>
+                        <li><a href={wikiUris.twitter}>Twitter product comparison tutorial</a></li>
+                        <li><a href={wikiUris.bbc}>BBC world news sentiments map tutorial</a></li>
+                        <li><a href={wikiUris.slackbot}>Slack search bot tutorial</a></li>
+                        <li><a href={wikiUris.slackslash}>Slack slash command tutorial</a></li>
                     </ul>
                 </div>
             </div>
