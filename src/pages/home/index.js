@@ -115,8 +115,8 @@ const Home = React.createClass({
                         <li><a href={wikiUris.helloworld}>Hello world tutorial</a></li>
                         <li><a href={wikiUris.twitter}>Twitter product comparison tutorial</a></li>
                         <li><a href={wikiUris.bbc}>BBC world news sentiments map tutorial</a></li>
-                        <li><a href={wikiUris.slackbot}>Slack search bot tutorial</a></li>
                         <li><a href={wikiUris.slackslash}>Slack slash command tutorial</a></li>
+                        <li><a href={wikiUris.slackbot}>Slack search bot tutorial</a></li>
                     </ul>
                 </div>
             </div>
