@@ -18,7 +18,7 @@ const stream = getPipeline.$
         .map(res => res.body)
         .catch(e => {
             createNotification({type: 'danger', message: e.message});
-            return Observable.return([]);
+            return Observable.return({error: e.message});
         })
     )
     .map(data => fromJS({
