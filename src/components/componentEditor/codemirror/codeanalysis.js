@@ -17,9 +17,14 @@ export default (code: string) => {
     const ast = esprima.parse(cleanCode.code, options);
     const {body} = ast;
     const exports = body.filter(node => node.type === 'ExportDefaultDeclaration');
-    // validate that there's one export
+    const namedExports = body.filter(node => node.type === 'ExportNamedDeclaration');
+    // validate that there's one default export
     if (exports.length === 0 || exports.length > 1) {
-        throw new Error('Component should export only one function!');
+        throw new Error('Component should export only one default function!');
+    }
+    // validate that there's one export
+    if (namedExports.length > 1) {
+        throw new Error('Component should have not more than one named export!');
     }
     // get export
     const result = exports.pop();
@@ -58,18 +63,31 @@ export default (code: string) => {
     // only do work if there are any params at all
     if (params.length > 0) {
         const lastParam = params[params.length - 1];
-        traverse(declaration, {
-            enter(node) {
-                // check for onNext
-                if (node.type === 'CallExpression' &&
-                    node.callee && node.callee.object && node.callee.property &&
-                    objectOfNamesAndTypes(node.callee.object, [lastParam.name], [lastParam.type]) &&
-                    objectOfNamesAndTypes(node.callee.property, ['onNext', 'onCompleted'], ['Identifier'])
-                ) {
-                    componentType = 'source';
+        // check named exports
+        if (namedExports.length === 1 &&
+            (
+                (namedExports[0].declaration.id &&
+                    namedExports[0].declaration.id.name === 'routeHandler') ||
+                (namedExports[0].declaration.declarations &&
+                    namedExports[0].declaration.declarations[0].id.name === 'routeHandler')
+            )
+        ) {
+            componentType = 'source';
+        } else {
+            // only traverse to check for observable methods if not already source
+            traverse(declaration, {
+                enter(node) {
+                    // check for onNext / onCompleted
+                    if (node.type === 'CallExpression' &&
+                        node.callee && node.callee.object && node.callee.property &&
+                        objectOfNamesAndTypes(node.callee.object, [lastParam.name], [lastParam.type]) &&
+                        objectOfNamesAndTypes(node.callee.property, ['onNext', 'onCompleted'], ['Identifier'])
+                    ) {
+                        componentType = 'source';
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // remove last param from final
         // if it's source - it's observable
