@@ -34,6 +34,15 @@ const Login = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-4 col-xs-offset-4">
+                    <h4>What is Exynize?</h4>
+                    <p className="description-text">
+                        Exynize is an AWS Lambda on steroids mixed with IFTTT.<br/>
+                        Log in to give it a shot out!<br/>
+                        Or head to <a href="https://github.com/Exynize/exynize-platform/wiki">our wiki</a> to
+                        find out more.
+                    </p>
+
+                    <h4>Login</h4>
                     <div className="panel panel-default">
                         <div className="panel-body form-horizontal">
                             <div className="form-group">
