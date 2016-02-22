@@ -1,5 +1,11 @@
 # Changelog
 
+0.8.1 / 2016-02-22
+==================
+
+  * fix error with new pipeline creation after editing
+  * show proper error for forbidden pipelines
+
 0.8.0 / 2016-02-22
 ==================
 
