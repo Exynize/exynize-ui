@@ -1,4 +1,5 @@
 import React from 'react';
+import isEmpty from 'lodash/isEmpty';
 import JSONTree from 'react-json-tree';
 
 const render = function() {
@@ -157,7 +158,9 @@ const render = function() {
                         <button className="close" onClick={this.resetTestResult}>
                             <span>&times;</span>
                         </button>
-                        {this.state.testResult.error}
+                        {this.state.testResult.error && !isEmpty(this.state.testResult.error) ?
+                            this.state.testResult.error :
+                            'Unknown error!'}
                     </div>
                     ) : ''}
 

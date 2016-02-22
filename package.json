@@ -28,6 +28,7 @@
     "http-proxy-middleware": "^0.10.0",
     "immutable": "^3.7.5",
     "jwt-decode": "^1.4.0",
+    "lodash": "^4.5.1",
     "moment": "^2.11.1",
     "node-uuid": "^1.4.7",
     "react": "^0.14.2",
