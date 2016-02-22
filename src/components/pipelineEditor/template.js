@@ -1,4 +1,5 @@
 import React from 'react';
+import isEmpty from 'lodash/isEmpty';
 import JSONTree from 'react-json-tree';
 import renderSource from './source';
 import renderProcessors from './processors';
@@ -70,8 +71,20 @@ const render = function() {
                             Save
                         </button>
 
+                        {/* test error alert */}
+                        {this.state.testResult && this.state.testResult.get('error') ? (
+                        <div className="row-margin-top alert alert-danger">
+                            <button className="close" onClick={this.resetTestResult}>
+                                <span>&times;</span>
+                            </button>
+                            {!isEmpty(this.state.testResult.get('error')) ?
+                                this.state.testResult.get('error') :
+                                'Unknown error!'}
+                        </div>
+                        ) : ''}
+
                         {this.state.testResult && this.state.testResult.get('resp') ? (
-                        <div className="row" key="testRes">
+                        <div className="row">
                             <p>Test result:</p>
                             <JSONTree data={this.state.testResult.get('resp')} />
                         </div>

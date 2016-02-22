@@ -133,6 +133,10 @@ const PipelineEditor = React.createClass({
         this.state.testResult.get('ws').send(JSON.stringify({end: true}));
         this.setState({testResult: fromJS({})});
     },
+    resetTestResult(e) {
+        e.preventDefault();
+        this.setState({testResult: fromJS({})});
+    },
 
     savePipeline(e) {
         e.preventDefault();
