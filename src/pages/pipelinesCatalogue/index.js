@@ -87,7 +87,7 @@ const PipelinesCatalogue = React.createClass({
                             className="btn btn-default btn-xs btn-margin-left"
                             href={`http://${apiUri}/api/pipes/` +
                                 `${p.user.username}/${p.refName}` +
-                                `/result?token=${localStorage.getItem('auth.token')}`}>
+                                `/result` + (!p.isPublic ? `?token=${localStorage.getItem('auth.token')}`: '')}>
                             <i className="glyphicon glyphicon-globe"></i> Web
                         </a>
                         <button
@@ -125,10 +125,12 @@ const PipelinesCatalogue = React.createClass({
                             </div>
                         </div>
                         ) : ''}
+                        {p.user.id === this.state.user.id ? (
                         <button className="btn btn-primary" onClick={this.startPipeline.bind(this, p)}>
                             Start
                         </button>
-                        {p.status === 'running' ? (
+                        ) : ''}
+                        {p.user.id === this.state.user.id && p.status === 'running' ? (
                         <button className="btn btn-danger" onClick={this.stopPipeline.bind(this, p)}>
                             Stop
                         </button>
