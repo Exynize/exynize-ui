@@ -1,5 +1,12 @@
 # Changelog
 
+0.7.0 / 2016-02-22
+==================
+
+  * correctly handle empty errors and errors during pipeline testing
+  * add basic intro to login screen
+  * correctly detect source component type using routeHandler export
+
 0.6.1 / 2016-02-18
 ==================
 
