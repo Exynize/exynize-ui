@@ -1,5 +1,11 @@
 # Changelog
 
+0.8.0 / 2016-02-22
+==================
+
+  * hide pipeline actions from non-owners
+  * public pipeline results support
+
 0.7.0 / 2016-02-22
 ==================
 
