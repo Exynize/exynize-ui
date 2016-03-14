@@ -6,6 +6,7 @@ import {Router, Route, browserHistory} from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootswatch/paper/bootstrap.min.css';
 import '../style/main.css';
+import '../style/ribbon.css';
 
 // app wrapper
 import App from './app';
