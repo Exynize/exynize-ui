@@ -8,6 +8,12 @@ const Login = React.createClass({
             .map(s => s.get('authed'))
             .filter(authed => authed === true)
             .subscribe(() => browserHistory.push('/'));
+        // get login and pass from location (for demo purposes)
+        // TODO: remove me after demo and figure out a better way
+        const {query} = this.props.location;
+        const {email, pass} = query;
+        this.refs.email.value = email || '';
+        this.refs.pass.value = pass || '';
     },
     componentWillUnmount() {
         this.sub.dispose();
