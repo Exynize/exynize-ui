@@ -10,6 +10,7 @@ const options = {
     target: process.env.NODE_ENV === 'production' ? 'http://exynize-rest:8080' : 'http://localhost:8080', // target host
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,                         // proxy websockets
+    logLevel: process.env.NODE_ENV === 'production' ? 'error' : 'info',
 };
 // create the proxy
 const proxy = proxyMiddleware(context, options);
