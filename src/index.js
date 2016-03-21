@@ -3,6 +3,10 @@ import {render} from 'react-dom';
 import {Router, Route, browserHistory} from 'react-router';
 import {clearNotifications} from './stores/notifications';
 
+// expose version
+import packageInfo from '../package.json';
+window.exynizeUIVersion = packageInfo.version;
+
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootswatch/paper/bootstrap.min.css';
