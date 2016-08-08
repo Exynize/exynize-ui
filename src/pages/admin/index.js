@@ -45,7 +45,7 @@ const Admin = React.createClass({
                                 <div className="row-picture">
                                     <img
                                         className="circle"
-                                        src={`http://www.gravatar.com/avatar/${md5(user.get('email'))}`} />
+                                        src={`//www.gravatar.com/avatar/${md5(user.get('email'))}`} />
                                 </div>
                                 <div className="row-content">
                                     <h5 className="list-group-item-heading">
